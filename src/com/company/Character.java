@@ -10,16 +10,19 @@ package com.company;
  */
 public class Character extends Elements{
     // The health point field
-    private int Hp;
+    private int HP;
 
     /**
      * This is constructor of this class
      *  It calls the constructor of superclass and pass the needed argument as an entry
      *  If we call this create a new Character class
-     * @param position the x&y coordination
+     * @param position the x&y coordinates
+     * @param HP The health point
+     * @param elementPath the path of element gif or image
      */
-    public Character(int[] position){
-        super(position);
+    public Character(int[] position , int HP , String elementPath){
+        super(position , elementPath);
+        this.HP = HP;
     }
 
     /**
@@ -27,7 +30,7 @@ public class Character extends Elements{
      * @return Hp
      */
     public int getHp() {
-        return Hp;
+        return HP;
     }
 
     /**
@@ -35,6 +38,14 @@ public class Character extends Elements{
      * @param hp Health point
      */
     public void setHp(int hp) {
-        Hp = hp;
+        HP = hp;
+    }
+
+    public void checkHP()
+    {
+        if (getHp() <= 0)
+        {
+            disappear();
+        }
     }
 }
