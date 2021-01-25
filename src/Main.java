@@ -1,6 +1,6 @@
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+	Click_To_Start_GUI p = new Click_To_Start_GUI();
     }
 }
