@@ -30,18 +30,15 @@ public class Loading_Gui {
      * create new Click To Start Frame and add Elements
      */
     public Loading_Gui() throws InterruptedException {
-        Home = new JFrame("Plants Vs. Zombies");
-        Home.setSize(1250, 748);
+        Home = new JFrame("Plants Vs Zombies");
+        Home.setSize(1200,740);
+        Home.setResizable(false);
         Home.setLocationRelativeTo(null);
         Home.setLayout(new BorderLayout());
-        Home.setResizable(false);
-        Home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         image = new JLabel();
         image.setIcon(new ImageIcon("./PVS Design Kit/images/final_600a85b755d9b4004bdf6d17_731777.gif"));
         Home.add(image, BorderLayout.CENTER);
         Home.setVisible(true);
-
         TimeUnit.SECONDS.sleep(12);
         Home.dispose();
         Click_To_Start_GUI next = new Click_To_Start_GUI();

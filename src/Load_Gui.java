@@ -82,7 +82,7 @@ public class Load_Gui {
         saves.setOpaque(false);
         saves.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.white));
         Home.add(saves);
-        get_number = new JLabel("Enter Your Save's Number :");
+        get_number = new JLabel("Enter Your Save's Name :");
         get_number.setLocation(600, 500);
         get_number.setSize(300, 50);
         get_number.setForeground(Color.white);
@@ -90,7 +90,7 @@ public class Load_Gui {
         Home.add(get_number);
         number = new JTextField();
         number.setLocation(880, 510);
-        number.setSize(40, 30);
+        number.setSize(220, 30);
         number.setForeground(Color.white);
         number.setFont(new Font("Arial", Font.BOLD, 20));
         number.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.white));

@@ -23,6 +23,8 @@ public class GameSettings {
     private String username;
     private String password;
 
+    // ToDo : write method to set parameters of game in Normal or Hard mode
+
     /**
      *
      * create new information
