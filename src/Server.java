@@ -49,6 +49,7 @@ public class Server {
         output = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
         try {
             while (true) {
+
                 handle();
             }
 
