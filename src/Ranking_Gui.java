@@ -31,7 +31,7 @@ public class Ranking_Gui {
     private JLabel text;
     private JTextArea ranking;
     private JButton back;
-    private GameSettings game_info;
+    private GameSetting game_info;
 
     private AudioInputStream as1 = AudioSystem.getAudioInputStream(new File("./PVS Design Kit/sounds/menu.wav"));
     private AudioFormat af = as1.getFormat();
@@ -44,7 +44,7 @@ public class Ranking_Gui {
      * create new Ranking screen
      * @param game_info data from player
      */
-    public Ranking_Gui(GameSettings game_info) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+    public Ranking_Gui(GameSetting game_info) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
         this.game_info = game_info;
         Home = new JFrame("Plants Vs. Zombies");
         Home.setSize(1200, 740);

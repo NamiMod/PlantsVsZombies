@@ -34,7 +34,7 @@ public class Change_Username_password_Gui {
     private JButton change;
     private JButton back;
     private JLabel logo;
-    private GameSettings game_info;
+    private GameSetting game_info;
 
     private AudioInputStream as1 = AudioSystem.getAudioInputStream(new File("./PVS Design Kit/sounds/menu.wav"));
     private AudioFormat af = as1.getFormat();
@@ -46,7 +46,7 @@ public class Change_Username_password_Gui {
     /**
      * create new change username or password page
      */
-    public Change_Username_password_Gui(GameSettings game_info) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+    public Change_Username_password_Gui(GameSetting game_info) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
         this.game_info = game_info;
         Home = new JFrame("Plants Vs. Zombies");
         Home.setSize(1200, 740);

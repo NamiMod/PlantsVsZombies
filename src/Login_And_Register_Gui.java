@@ -98,7 +98,7 @@ public class Login_And_Register_Gui {
                     JOptionPane.showMessageDialog(Home,"Login Successfully","Welcome",JOptionPane.PLAIN_MESSAGE);
                     try {
                         Home.dispose();
-                        GameSettings info = new GameSettings();
+                        GameSetting info = new GameSetting();
                         info.setUsername(username.getText());
                         info.setPassword(password.getText());
                         Menu_Gui next = new Menu_Gui(info);
@@ -110,7 +110,7 @@ public class Login_And_Register_Gui {
                     JOptionPane.showMessageDialog(Home,"Account Created","Welcome",JOptionPane.PLAIN_MESSAGE);
                     try {
                         Home.dispose();
-                        GameSettings info = new GameSettings();
+                        GameSetting info = new GameSetting();
                         info.setUsername(username.getText());
                         info.setPassword(password.getText());
                         Menu_Gui next = new Menu_Gui(info);

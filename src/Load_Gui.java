@@ -34,7 +34,7 @@ public class Load_Gui {
     private JLabel get_number;
     private JButton load;
     private JButton menu;
-    private GameSettings game_info;
+    private GameSetting game_info;
 
     private AudioInputStream as1 = AudioSystem.getAudioInputStream(new File("./PVS Design Kit/sounds/menu.wav"));
     private AudioFormat af = as1.getFormat();
@@ -48,7 +48,7 @@ public class Load_Gui {
      *
      * @param game_info information of game
      */
-    public Load_Gui(GameSettings game_info) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+    public Load_Gui(GameSetting game_info) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         this.game_info=game_info;
         Home = new JFrame("Plants Vs. Zombies");
         Home.setSize(1200, 740);

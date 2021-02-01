@@ -32,7 +32,7 @@ public class Score_Gui {
     private JLabel image_score;
     private JButton replay;
     private int your_score;
-    private GameSettings game_info;
+    private GameSetting game_info;
 
     private AudioInputStream as1 = AudioSystem.getAudioInputStream(new File("./PVS Design Kit/sounds/game_end.wav"));
     private AudioFormat af = as1.getFormat();
@@ -47,7 +47,7 @@ public class Score_Gui {
      * @throws IOException cant open file
      * @throws LineUnavailableException cant track data from file
      */
-    public Score_Gui(int score,GameSettings game_info) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    public Score_Gui(int score,GameSetting game_info) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         this.game_info = game_info;
         this.your_score=score;
         Home = new JFrame("Plants Vs. Zombies");
