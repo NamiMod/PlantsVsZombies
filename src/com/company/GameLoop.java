@@ -28,7 +28,7 @@ public class GameLoop implements Runnable {
     /**
      * Frame Per Second.
      */
-    private static final int FPS = 30;
+    private static final int FPS = 60;
     //The game frame
     private GameFrame canvas;
     //The game state

@@ -16,7 +16,7 @@ public class CherryBomb extends Bomb{
      * @param position    the x & y coordinates
      */
     public CherryBomb(int[] position ,GameState gameState) {
-        super(position, 150, 70, "./gifs/newCherryBomb.gif",gameState);
+        super(position, 150, 70, "newCherryBomb.gif",gameState);
     }
 
     /**
