@@ -48,7 +48,9 @@ public class Server {
         input = new BufferedReader(new InputStreamReader(client.getInputStream()));
         output = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
         try {
-            handle();
+            while (true) {
+                handle();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

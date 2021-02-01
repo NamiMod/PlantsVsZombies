@@ -6,7 +6,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException, InterruptedException, LineUnavailableException, UnsupportedAudioFileException {
 
-       Load_Gui p = new Load_Gui(new GameSettings());
+       Client p = new Client();
+       p.start("salam","salam2");
+        p.start("salam","salam");
 
     }
 }
