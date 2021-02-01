@@ -133,4 +133,5 @@ public class User implements Serializable {
     public String toString(){
         return (username+"          "+score+"   "+win+"   "+lose+"   "+normalGames+"   "+hardGames+"\n");
     }
+
 }
