@@ -16,7 +16,7 @@ public class Pea extends Bullet{
      *
      * @param position the x & y coordinates
      */
-    public Pea(int[] position) {
-        super(position, "elementPath",30);
+    public Pea(int[] position , GameState gameState) {
+        super(position, 1 ,"pea.png",30 , gameState);
     }
 }

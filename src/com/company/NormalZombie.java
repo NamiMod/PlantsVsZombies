@@ -17,7 +17,7 @@ public class NormalZombie extends Zombie{
      * @param speed       The speed of zombie
      * @param attackPower The ability of destroying
      */
-    public NormalZombie(int[] position, int speed, int attackPower) {
-        super(position, 200, speed, attackPower, "elementPath");
+    public NormalZombie(int[] position, int speed, int attackPower ,GameState gameState) {
+        super(position, 200, speed, attackPower, "normalzombie.gif" , gameState);
     }
 }

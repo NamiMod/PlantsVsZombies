@@ -15,7 +15,18 @@ public class CherryBomb extends Bomb{
      *
      * @param position    the x & y coordinates
      */
-    public CherryBomb(int[] position) {
-        super(position, 150, 70, "elementPath");
+    public CherryBomb(int[] position ,GameState gameState) {
+        super(position, 150, 70, "./gifs/newCherryBomb.gif",gameState);
+    }
+
+    /**
+     * we define the work that this plant must do
+     * the cherry bomb should blast after we plant it
+     * for this we should call the blasting method of Bomb class
+     */
+    @Override
+    public void action() {
+        super.action();
+        blasting(100);
     }
 }

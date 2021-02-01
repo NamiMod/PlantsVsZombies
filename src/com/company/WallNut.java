@@ -1,4 +1,7 @@
 package com.company;
+
+import java.awt.*;
+
 /**
  * This is WallNut class.its a kind of Barrier plants.
  * It handles the works related to This type of Barrier
@@ -15,7 +18,17 @@ public class WallNut extends Barrier{
      *
      * @param position the x & y coordinates
      */
-    public WallNut(int[] position) {
-        super(position, 50, 150, "elementPath");
+    public WallNut(int[] position ,GameState gameState) {
+        super(position, 50, 150, "walnut_full_life.gif", gameState);
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        if (getHp()<75){
+            setElementPath("walnut_half_life.gif");
+            Image image = Main.loadImage(getElementPath());
+            setImage(image);
+        }
     }
 }

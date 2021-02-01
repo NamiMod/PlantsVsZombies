@@ -17,7 +17,7 @@ public class Barrier extends Plant{
      * @param HP          The health point
      * @param elementPath the path of element gif or image
      */
-    public Barrier(int[] position, int cost, int HP, String elementPath) {
-        super(position, cost, HP, elementPath);
+    public Barrier(int[] position, int cost, int HP, String elementPath,GameState gameState) {
+        super(position, cost, HP, elementPath ,gameState);
     }
 }

@@ -16,15 +16,19 @@ public class SunFlower extends SunPlant{
      * @param position         The x & y coordinates
      * @param sunProducingTime The needed time for producing a sun
      */
-    public SunFlower(int[] position , int sunProducingTime) {
-        super(position, 50, 50, "elementPath", sunProducingTime);
+    public SunFlower(int[] position , int sunProducingTime ,GameState gameState) {
+        super(position, 50, 50, "sun_flower.gif", sunProducingTime,gameState);
     }
 
-    /**
-     * This method is using for producing sun.
-     */
-    public void produceSun()
-    {
 
+    /**
+     * This method overrides the action method in Elements class
+     * The action related to this plant is only producing sun
+     * So we call the produceSun method in SunPlant class
+     */
+    @Override
+    public void action() {
+        super.action();
+        produceSun();
     }
 }

@@ -15,7 +15,7 @@ public class Jalapeno extends Bomb{
      *
      * @param position the x & y coordinates
      */
-    public Jalapeno(int[] position) {
-        super(position, 200, 100, "elementPath");
+    public Jalapeno(int[] position , GameState gameState) {
+        super(position, 200, 100, "elementPath" ,gameState);
     }
 }

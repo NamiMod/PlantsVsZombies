@@ -17,7 +17,7 @@ public class ConeHeadZombie extends Zombie{
      * @param speed       The speed of zombie
      * @param attackPower The ability of destroying
      */
-    public ConeHeadZombie(int[] position, int speed, int attackPower) {
-        super(position, 560, speed, attackPower, "elementPath");
+    public ConeHeadZombie(int[] position, int speed, int attackPower , GameState gameState) {
+        super(position, 560, speed, attackPower, "coneheadzombie.gif" , gameState);
     }
 }

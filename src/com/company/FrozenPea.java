@@ -15,7 +15,16 @@ public class FrozenPea extends Bullet{
      *
      * @param position the x & y coordinates
      */
-    public FrozenPea(int[] position) {
-        super(position, "elementPath",35);
+    public FrozenPea(int[] position , GameState gameState) {
+        super(position, 1 ,"freezepea.png",35 , gameState);
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        Zombie zombie = getDestroyedZombie();
+        if (zombie != null ) {
+            zombie.hitWithFrozenPea();
+        }
     }
 }

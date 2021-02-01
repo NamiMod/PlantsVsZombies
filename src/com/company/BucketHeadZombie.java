@@ -17,7 +17,7 @@ public class BucketHeadZombie extends Zombie{
      * @param speed       The speed of zombie
      * @param attackPower The ability of destroying
      */
-    public BucketHeadZombie(int[] position, int speed, int attackPower) {
-        super(position, 1300, speed, attackPower, "elementPath");
+    public BucketHeadZombie(int[] position, int speed, int attackPower , GameState gameState) {
+        super(position, 1300, speed, attackPower, "bucketheadzombie.gif" , gameState);
     }
 }

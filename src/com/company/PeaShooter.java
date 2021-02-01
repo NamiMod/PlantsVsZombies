@@ -13,25 +13,23 @@ public class PeaShooter extends Shooter{
      * It creates a new PeaShooter with a given position
      * @param position the x & y coordinates
      */
-    public PeaShooter(int[] position ){
-        super(position, 100, 70 ,"peaShooter.gif");
+    public PeaShooter(int[] position , GameState gameState ){
+        super(position, 100, 70 ,"peashooter.gif",gameState);
     }
 
     /**
-     * If the zombies are coming across this type of plant we call this method
+     * If the zombies are coming across this type of plant we call this method to do the best action
      * It creates bullet for killing zombies
-     * This plant create pea bullet.
+     * This plant create FrozenPea bullet.
      */
-    @Override
-    public void throwBullet() {
-        super.throwBullet();
-        int[] bulletFirstPos = this.getPosition();
-        bulletFirstPos[1] += 4;
-        Bullet b = new Pea(bulletFirstPos);
-    }
-
     @Override
     public void action() {
         super.action();
+       /* int[] bulletFirstPos = new int[2];
+        bulletFirstPos[0] = getPosition()[0] + 20;
+        bulletFirstPos[1] = getPosition()[1] + 10;
+        Pea pea = new Pea(bulletFirstPos, getGameState());*/
+        throwBullet();
+
     }
 }

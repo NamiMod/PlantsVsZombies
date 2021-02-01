@@ -16,20 +16,22 @@ public class Repeater extends Shooter{
      *
      * @param position    the x & y coordinates
      */
-    public Repeater(int[] position) {
-        super(position, 150, 90, "elementPath");
+    public Repeater(int[] position, GameState gameState) {
+        super(position, 150, 90, "repeater.gif", gameState);
     }
 
     /**
-     * If the zombies are coming across this type of plant we call this method
+     * If the zombies are coming across this type of plant we call this method to do the best action
      * It creates bullet for killing zombies
-     * This plant create double Pea bullet.
+     * This plant create FrozenPea bullet.
      */
     @Override
-    public void throwBullet() {
-        super.throwBullet();
-        int[] bulletFirstPos = this.getPosition();
-        bulletFirstPos[1] += 4;
-        Bullet b = new FrozenPea(bulletFirstPos);
+    public void action() {
+        super.action();
+        /*int[] bulletFirstPos = new int[2];
+        bulletFirstPos[0] = getPosition()[0] + 20;
+        bulletFirstPos[1] = getPosition()[1] + 10;
+        Pea pea = new Pea(bulletFirstPos, getGameState());*/
+        throwBullet();
     }
 }
