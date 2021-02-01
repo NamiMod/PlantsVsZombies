@@ -1,3 +1,5 @@
+import com.company.GameSetting;
+
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;

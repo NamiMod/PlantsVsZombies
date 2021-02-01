@@ -1,3 +1,6 @@
+import com.company.Game;
+import com.company.GameSetting;
+
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
@@ -42,6 +45,13 @@ public class Menu_Gui {
     private DataLine.Info info = new DataLine.Info(Clip.class, af);
     private Line line1 = AudioSystem.getLine(info);
 
+
+    private AudioInputStream as2= AudioSystem.getAudioInputStream(new File("./PVS Design Kit/sounds/background.wav"));
+    private AudioFormat af2 = as2.getFormat();
+    private Clip clip2 = AudioSystem.getClip();
+    private DataLine.Info info2 = new DataLine.Info(Clip.class, af2);
+    private Line line2 = AudioSystem.getLine(info2);
+
     /**
      * create new Menu window
      * @param game_info information of game
@@ -79,11 +89,15 @@ public class Menu_Gui {
             public void actionPerformed(ActionEvent e) {
                 Home.dispose();
                 clip1.stop();
-                try {
-                    Score_Gui next = new Score_Gui(100,game_info);
-                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException unsupportedAudioFileException) {
-                    unsupportedAudioFileException.printStackTrace();
+                if (game_info.getSound() == 0){
+                    try {
+                        playSoundGame();
+                    } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ioException) {
+                        ioException.printStackTrace();
+                    }
                 }
+                Game game = new Game();
+                game.start();
             }
         });
         Home.add(new_game);
@@ -181,6 +195,23 @@ public class Menu_Gui {
             clip1.open(as1);
             clip1.loop(Clip.LOOP_CONTINUOUSLY);
             clip1.start();
+        }
+
+    }
+
+    /**
+     * play music
+     * @throws IOException cant open music
+     * @throws UnsupportedAudioFileException music file is not in good format
+     * @throws LineUnavailableException cant track data of file
+     */
+    public void playSoundGame() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+
+        if ( ! line2.isOpen() )
+        {
+            clip2.open(as2);
+            clip2.loop(Clip.LOOP_CONTINUOUSLY);
+            clip2.start();
         }
 
     }

@@ -33,7 +33,6 @@ public class Client {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     }
 
     public int login(String username , String password) throws IOException {
@@ -84,4 +83,3 @@ public class Client {
     }
 
 }
-
