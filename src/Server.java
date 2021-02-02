@@ -1,6 +1,9 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  *  -- Server --
@@ -24,11 +27,9 @@ import java.net.Socket;
 public class Server {
 
     private ServerSocket serversocket;
-    private Socket client;
     private BufferedReader input;
     private PrintWriter output;
     FileHandler file = new FileHandler();
-
 
     public static void main(String[] args){
         Server server = new Server();
@@ -39,53 +40,102 @@ public class Server {
             e.printStackTrace();
         }
     }
-
     public void start() throws IOException {
-        serversocket = new ServerSocket(7049);
+        serversocket = new ServerSocket(5050);
         System.out.println("Connection Starting on port:" + serversocket.getLocalPort());
-        client = serversocket.accept();
-        System.out.println("Waiting for connection from client");
-        input = new BufferedReader(new InputStreamReader(client.getInputStream()));
-        output = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
-        try {
-            handle();
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        while (true) {
+            Socket client = serversocket.accept();
+            System.out.println("Waiting for connection from client");
+            input = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            output = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
+            try {
+                if (handle() == 1){
+                    break;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+        System.out.println("End");
+        serversocket.close();
     }
 
-    public void handle() throws IOException {
+    public int handle() throws IOException {
 
         String code = input.readLine();
 
-        if (code.equals("0")) {
+        if (code.equals("-1")) {
+            //exit from server
+            output.flush();
+            output.close();
+            return 1;
+        }
 
+        if (code.equals("0")) {
+            //login
             String username = input.readLine();
             String password = input.readLine();
-            if (file.login(username, password)) {
+            if (file.login(username, password) == 1) {
                 output.println("1");
             } else {
                 output.println("0");
             }
         }
         if (code.equals("1")) {
-
+            //register new user
             String username = input.readLine();
             String password = input.readLine();
-            if (file.register(username, password)) {
+            if (file.register(username, password) == 1) {
                 output.println("1");
             } else {
                 output.println("0");
             }
         }
         if (code.equals("2")) {
-            output.println(file.getRanking());
-            System.out.println(file.getRanking());
+            output.write("Data.txt");
         }
+        if (code.equals("3")) {
+            //change username or password
+            String username = input.readLine();
+            String password = input.readLine();
+            String newUsername = input.readLine();
+            String newPassword = input.readLine();
+            if (file.changeUsernameOrPassword(username, password,newUsername,newPassword) == 1) {
+                output.println("1");
+            } else {
+                output.println("0");
+            }
+        }
+        if (code.equals("4")) {
+            // update score
+            String username = input.readLine();
+            int mode = input.read();
+            int WinOrLose = input.read();
+
+            if (mode == 0) {
+
+                if (WinOrLose == 0) {
+                    file.updateScore(username,3,1,0,1,0);
+                }
+            } else {
+                file.updateScore(username,-1,0,1,1,0);
+            }
+
+            if (mode == 1) {
+
+                if (WinOrLose == 0) {
+                    file.updateScore(username,10,1,0,0,1);
+                } else {
+                    file.updateScore(username,-3,0,1,0,1);
+                }
+
+            }
+        }
+        file.sort();
 
         output.flush();
         output.close();
+        return 0;
 
     }
 
