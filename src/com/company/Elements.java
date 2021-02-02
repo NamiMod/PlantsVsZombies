@@ -121,13 +121,10 @@ public class Elements {
         g2d.drawImage(image, position[0], position[1], width, height, null);
     }
 
-
-
     public void selfDestruction() {
         gameState.deleteElements(this);
     }
     public void clickAction(){
-
     }
 
     public void remove(){

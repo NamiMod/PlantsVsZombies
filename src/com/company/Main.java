@@ -1,6 +1,8 @@
 package com.company;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,6 +15,14 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Main {
     private static HashMap<String, Image> cachedImages = new HashMap<String, Image>();
+
+        public static void main(String[] args) throws IOException, InterruptedException, LineUnavailableException, UnsupportedAudioFileException {
+
+           // Click_To_Start_GUI p = new Click_To_Start_GUI();
+            Menu_Gui p = new Menu_Gui(new GameSetting());
+
+        }
+
     /**
      * loading gif images
      * @param filename

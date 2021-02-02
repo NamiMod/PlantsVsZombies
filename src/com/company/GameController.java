@@ -62,6 +62,10 @@ public class GameController {
         int[] shovelFirstPos = new int[]{120,500};
         state.addElement(new Shovel(shovelFirstPos, state));
 
+        //adding menu button
+        int[] menuPos = new int[]{40,450};
+        state.addElement(new GameMenuButton(menuPos,150,40,state));
+
     }
 
 
