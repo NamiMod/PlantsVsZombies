@@ -38,6 +38,7 @@ public class Load_Gui {
     private JButton load;
     private JButton menu;
     private GameSetting game_info;
+    private FileHandler file;
 
     private AudioInputStream as1 = AudioSystem.getAudioInputStream(new File("./PVS Design Kit/sounds/menu.wav"));
     private AudioFormat af = as1.getFormat();
@@ -60,6 +61,7 @@ public class Load_Gui {
         Home.setResizable(false);
         Home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Home.setContentPane(new JLabel(new ImageIcon("./PVS Design Kit/images/load.jpg")));
+        file = new FileHandler();
         addElement();
         Home.setVisible(true);
         if (game_info.getSound() == 0){
@@ -78,6 +80,7 @@ public class Load_Gui {
         text.setFont(new Font("Arial", Font.BOLD, 40));
         Home.add(text);
         saves = new JTextArea();
+        saves.setText(file.getSaves(game_info.getUsername()));
         saves.setLocation(600, 280);
         saves.setSize(500, 200);
         saves.setForeground(Color.white);

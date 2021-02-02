@@ -4,6 +4,7 @@ package com.company;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.awt.Cursor;
 import java.util.Iterator;
@@ -29,7 +30,7 @@ import java.util.Iterator;
 
 //Todo : Game setting  *****************************
 
-public class GameState {
+public class GameState implements Serializable {
     //The handler related to mouse
     private MouseHandler mouseHandler;
     //The

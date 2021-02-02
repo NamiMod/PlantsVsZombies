@@ -1,10 +1,16 @@
 package com.company;
 
+import javax.swing.*;
+
 /**
  * creating the button of the menu in the gameFrame
  */
 
-class GameMenuButton extends Elements {
+public class GameMenuButton extends Elements {
+
+    private GameSetting state;
+    private GameFrame game;
+
     /**
      * menuButton constructor
      * @param pos
@@ -12,15 +18,15 @@ class GameMenuButton extends Elements {
      * @param height
      * @param gameState
      */
-
     GameMenuButton(int[] pos, int width, int height, GameState gameState) {
         super(pos, "menu.jpg", gameState , width, height);
+        this.state=gameState.getGameSetting();
     }
 
     /**
      * opens the select menu by being clicked
      */
     public void clickAction() {
-        new GameMenu();
+        new GameMenu(state);
     }
 }

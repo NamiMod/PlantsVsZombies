@@ -42,7 +42,7 @@ public class Server {
         }
     }
     public void start() throws IOException {
-        serversocket = new ServerSocket(5052);
+        serversocket = new ServerSocket(5055);
         System.out.println("Connection Starting on port:" + serversocket.getLocalPort());
         while (true) {
             Socket client = serversocket.accept();

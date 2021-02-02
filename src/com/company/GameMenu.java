@@ -17,13 +17,14 @@ package com.company;
  * selecting menu in the middle of the game
  */
 public class GameMenu  {
-    private GameState state;
-    private JFrame frame ;
+     GameSetting state;
+     JFrame frame ;
     /**
      * select menu constructor
      */
 
-    GameMenu() {
+    public GameMenu(GameSetting state) {
+        this.state=state;
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -99,9 +100,10 @@ public class GameMenu  {
 
                     Cursor cursor = Cursor.getDefaultCursor();
                     if (exitButton.contains(e.getPoint())) {
-                        frame.dispose();
                         try {
-                            Menu_Gui p = new Menu_Gui(state.getGameSetting());
+                            frame.dispose();
+                            System.exit(1);
+                            Menu_Gui q = new Menu_Gui(state);
                         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException unsupportedAudioFileException) {
                             unsupportedAudioFileException.printStackTrace();
                         }

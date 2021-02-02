@@ -429,16 +429,31 @@ public class FileHandler {
     /**
      * in this method we can save game to file
      */
-    public void save(){
-        // ToDo : Write this method
+    public void save(String name , GameState state){
+
+        try (FileOutputStream fs = new FileOutputStream(name + ".PVZ")){
+            ObjectOutputStream  os = new ObjectOutputStream(fs);
+            os.writeObject(state);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * in this method we can load game from file with fileName
-     * @param fileName name of save
+     * @param file name of save
      */
-    public void load(String fileName){
-        // ToDo : Write this method
+    public GameState load(File file){
+        GameState result = new GameState();
+        try (FileInputStream fs = new FileInputStream(file)){
+            ObjectInputStream os = new ObjectInputStream(fs);
+
+            return (GameState) os.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
