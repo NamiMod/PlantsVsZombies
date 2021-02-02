@@ -24,7 +24,7 @@ public class UpdateScoreRequest {
     private PrintWriter output;
 
     public void start(String username , int mode , int WinOrLose) throws IOException {
-        socket = new Socket("127.0.0.1", 5050);
+        socket = new Socket("127.0.0.1", 5052);
         output = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
         read = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         try {

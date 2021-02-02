@@ -23,12 +23,12 @@ public class EndRequest {
     private BufferedReader read;
     private PrintWriter output;
 
-    public void start(String username , int mode , int WinOrLose) throws IOException {
-        socket = new Socket("127.0.0.1", 5050);
+    public void start() throws IOException {
+        socket = new Socket("127.0.0.1", 5052);
         output = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
         read = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         try {
-            output.println("-1");
+            output.println("9");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

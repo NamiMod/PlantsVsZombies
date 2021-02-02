@@ -65,8 +65,8 @@ public class Ranking_Gui {
     /**
      * add elements to page
      */
-    public void addElement() {
-
+    public void addElement() throws IOException {
+        RankingRequest p = new RankingRequest();
         text = new JLabel("Ranking");
         text.setLocation(200,10);
         text.setSize(250,50);
@@ -80,7 +80,7 @@ public class Ranking_Gui {
         ranking.setBackground(new Color(0, 0, 0, 0));
         ranking.setOpaque(false);
         ranking.setForeground(Color.white);
-        ranking.setText("Rank      Username          Score   Win   Lose   Normal   Hard "+"\n");
+        ranking.setText("Rank      Username          Score   Win   Lose   Normal   Hard "+"\n"+p.start());
         Home.add(ranking);
         back = new JButton("Main Menu");
         back.setLocation(200,600);

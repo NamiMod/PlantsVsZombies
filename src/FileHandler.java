@@ -62,7 +62,7 @@ public class FileHandler {
      * @param password password of player
      * @return can in possible or not
      */
-    public boolean login(String username, String password) {
+    public int login(String username, String password) {
         try {
             FileReader fileReader = new FileReader("Data.txt");
             Scanner getString = new Scanner(fileReader);
@@ -78,14 +78,14 @@ public class FileHandler {
                 user.setNormalGames(Integer.parseInt(getString.nextLine()));
                 user.setHardGames(Integer.parseInt(getString.nextLine()));
                 if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                    return true;
+                    return 1;
                 }
             }
             fileReader.close();
             getString.close();
-            return false;
+            return 0;
         } catch (Exception e) {
-            return false;
+            return -1;
         }
 
     }
@@ -98,7 +98,7 @@ public class FileHandler {
      * @return can it possible or not
      * @throws IOException when cant write in file
      */
-    public boolean register(String username, String password) throws IOException {
+    public int register(String username, String password) throws IOException {
 
         if (usable(username)) {
             User newUser = new User(username, password);
@@ -111,9 +111,9 @@ public class FileHandler {
             fw.write(newUser.getNormalGames() + "\n");
             fw.write(newUser.getHardGames() + "\n");
             fw.close();
-            return true;
+            return 1;
         } else {
-            return false;
+            return 0;
         }
 
     }
@@ -220,12 +220,14 @@ public class FileHandler {
     /**
      * change username of password if it's possible
      *
+     *
+     * @param s
      * @param username    old username
      * @param newUsername new username
      * @param newPassword new password
      * @return is it possible or not
      */
-    public boolean changeUsernameOrPassword(String username, String newUsername, String newPassword) {
+    public int changeUsernameOrPassword(String s, String username, String newUsername, String newPassword) {
         if (usable(newUsername)) {
             try {
                 FileWriter clear = new FileWriter("DataTemp.txt", false);
@@ -261,12 +263,12 @@ public class FileHandler {
                 getString.close();
                 fw.close();
                 copy();
-                return true;
+                return 1;
             } catch (Exception e) {
-                return false;
+                return 0;
             }
         }
-        return false;
+        return -1;
     }
 
     /**
@@ -352,8 +354,42 @@ public class FileHandler {
 
             }
         }
+    }
 
+    /**
+     * read ranking from data
+     *
+     * @return ranking
+     * @throws IOException cant read or write file
+     */
+    public String openRanking(String name) throws IOException {
 
+        int counter = 1;
+        StringBuilder ranking = new StringBuilder();
+        try {
+            FileReader fileReader = new FileReader(name);
+            Scanner getString = new Scanner(fileReader);
+            User user = new User("", "");
+
+            while (getString.hasNextLine()) {
+
+                ranking.append(counter+" ) ");
+                user.setUsername(getString.nextLine());
+                user.setPassword(getString.nextLine());
+                user.setScore(Integer.parseInt(getString.nextLine()));
+                user.setWin(Integer.parseInt(getString.nextLine()));
+                user.setLose(Integer.parseInt(getString.nextLine()));
+                user.setNormalGames(Integer.parseInt(getString.nextLine()));
+                user.setHardGames(Integer.parseInt(getString.nextLine()));
+                ranking.append(user.toString());
+                counter++;
+            }
+            fileReader.close();
+            getString.close();
+            return ranking.toString();
+        } catch (Exception e) {
+            return "Cant Open File";
+        }
     }
 
     /**

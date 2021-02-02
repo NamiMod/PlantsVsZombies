@@ -96,28 +96,42 @@ public class Login_And_Register_Gui {
             public void actionPerformed(ActionEvent e) {
 
                 if (login_register.getText().equals("Login")){
-                    // login
-                    JOptionPane.showMessageDialog(Home,"Login Successfully","Welcome",JOptionPane.PLAIN_MESSAGE);
+                    LoginRequest p = new LoginRequest();
                     try {
-                        Home.dispose();
-                        GameSetting info = new GameSetting();
-                        info.setUsername(username.getText());
-                        info.setPassword(password.getText());
-                        Menu_Gui next = new Menu_Gui(info);
-                    } catch (UnsupportedAudioFileException | IOException | LineUnavailableException unsupportedAudioFileException) {
-                        unsupportedAudioFileException.printStackTrace();
+                        if (p.start(username.getText(), password.getText()) == 1) {
+                            JOptionPane.showMessageDialog(Home, "Login Successfully", "Welcome", JOptionPane.PLAIN_MESSAGE);
+                            try {
+                                Home.dispose();
+                                GameSetting info = new GameSetting();
+                                info.setUsername(username.getText());
+                                info.setPassword(password.getText());
+                                Menu_Gui next = new Menu_Gui(info);
+                            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException unsupportedAudioFileException) {
+                                unsupportedAudioFileException.printStackTrace();
+                            }
+                        }else {
+                            JOptionPane.showMessageDialog(Home, "Username Or Password incorrect", "error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
                     }
                 }else {
-                    // register account
-                    JOptionPane.showMessageDialog(Home,"Account Created","Welcome",JOptionPane.PLAIN_MESSAGE);
+                    RegisterRequest p = new RegisterRequest();
                     try {
-                        Home.dispose();
-                        GameSetting info = new GameSetting();
-                        info.setUsername(username.getText());
-                        info.setPassword(password.getText());
-                        Menu_Gui next = new Menu_Gui(info);
-                    } catch (UnsupportedAudioFileException | IOException | LineUnavailableException unsupportedAudioFileException) {
-                        unsupportedAudioFileException.printStackTrace();
+                        if (p.start(username.getText(), password.getText()) == 1) {
+                            JOptionPane.showMessageDialog(Home, "Account Created", "Welcome", JOptionPane.PLAIN_MESSAGE);
+                            try {
+                                Home.dispose();
+                                GameSetting info = new GameSetting();
+                                info.setUsername(username.getText());
+                                info.setPassword(password.getText());
+                                Menu_Gui next = new Menu_Gui(info);
+                            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException unsupportedAudioFileException) {
+                                unsupportedAudioFileException.printStackTrace();
+                            }
+                        }
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
                     }
                 }
 

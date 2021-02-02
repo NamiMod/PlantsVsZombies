@@ -41,7 +41,7 @@ public class Server {
         }
     }
     public void start() throws IOException {
-        serversocket = new ServerSocket(5050);
+        serversocket = new ServerSocket(5052);
         System.out.println("Connection Starting on port:" + serversocket.getLocalPort());
         while (true) {
             Socket client = serversocket.accept();
@@ -64,7 +64,7 @@ public class Server {
 
         String code = input.readLine();
 
-        if (code.equals("-1")) {
+        if (code.equals("9")) {
             //exit from server
             output.flush();
             output.close();

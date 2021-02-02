@@ -24,7 +24,7 @@ public class Client {
     private PrintWriter output;
 
     public void start(String username , String password) throws IOException {
-        socket = new Socket("127.0.0.1", 7049);
+        socket = new Socket("127.0.0.1", 7057);
         output = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
         read = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         try {

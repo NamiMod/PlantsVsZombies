@@ -177,6 +177,12 @@ public class Menu_Gui {
             public void actionPerformed(ActionEvent e) {
                 Home.dispose();
                 clip1.stop();
+                EndRequest p = new EndRequest();
+                try {
+                    p.start();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
             }
         });
         Home.add(quit);

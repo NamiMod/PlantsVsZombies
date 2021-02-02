@@ -72,7 +72,7 @@ public class Change_Username_password_Gui {
         logo.setSize(300, 200);
         logo.setIcon(new ImageIcon("./PVS Design Kit/images/logo.png"));
         Home.add(logo);
-        username = new JTextField("OLD Username");
+        username = new JTextField("Old Username");
         username.setLocation(450, 280);
         username.setSize(300, 40);
         username.setFont(new Font("Arial", 0, 15));
@@ -80,7 +80,7 @@ public class Change_Username_password_Gui {
         username.setBackground(new Color(0, 0, 0, 0));
         username.setOpaque(false);
         Home.add(username);
-        password = new JTextField("OLD Password");
+        password = new JTextField("Old Password");
         password.setLocation(450, 330);
         password.setSize(300, 40);
         password.setFont(new Font("Arial", 0, 15));
@@ -88,7 +88,7 @@ public class Change_Username_password_Gui {
         password.setBackground(new Color(0, 0, 0, 0));
         password.setOpaque(false);
         Home.add(password);
-        newUsername = new JTextField("NEW Username");
+        newUsername = new JTextField("New Username");
         newUsername.setLocation(450, 400);
         newUsername.setSize(300, 40);
         newUsername.setFont(new Font("Arial", 0, 15));
@@ -118,7 +118,21 @@ public class Change_Username_password_Gui {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                // change username or password
+               if (game_info.getUsername().equals(username.getText()) && game_info.getPassword().equals(password.getText())){
+                   ChangeRequest p = new ChangeRequest();
+                   try {
+                       if (p.start(username.getText(),password.getText(),newUsername.getText(),newPassword.getText() ) == 1){
+                           JOptionPane.showMessageDialog(Home, "Changed Successfully", "Change", JOptionPane.PLAIN_MESSAGE);
+                           game_info.setUsername(newUsername.getText());
+                           game_info.setPassword(newPassword.getText());
+                           Home.dispose();
+                           clip1.stop();
+                           Login_And_Register_Gui q = new Login_And_Register_Gui();
+                       }
+                   } catch (IOException ioException) {
+                       ioException.printStackTrace();
+                   }
+               }
             }
         });
         Home.add(change);

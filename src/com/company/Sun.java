@@ -102,7 +102,7 @@ public class Sun extends Elements{
     public void clickAction() {
         super.clickAction();
         playSound();
-        getGameState().setMoney(getGameState().getMoney() + 25);
+        getGameState().setMoney(getGameState().getMoney() + 250);
     }
     /**
      * sound for collecting sun !!!
