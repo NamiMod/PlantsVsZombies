@@ -16,6 +16,7 @@ public class NormalZombie extends Zombie{
      * @param position    the x&y coordinates
      * @param speed       The speed of zombie
      * @param attackPower The ability of destroying
+     * @param gameState   the state of game
      */
     public NormalZombie(int[] position, int speed, int attackPower ,GameState gameState) {
         super(position, 200, speed, attackPower, "normalzombie.gif" , gameState);

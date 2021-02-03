@@ -8,8 +8,8 @@ public class WallNutCard extends Card{
      * @param position    the x&y coordinates
      * @param gameState   the game state
      */
-    public WallNutCard(int[] position, GameState gameState) {
-        super(position, "cards/icedwalnutpicker.png", "cards/WalNut.png", gameState, 50);
+    public WallNutCard(int[] position, GameState gameState, int chargingTime) {
+        super(position, "cards/icedwalnutpicker.png", "cards/WalNut.png", gameState, 50,chargingTime);
     }
 
     /**
@@ -22,7 +22,7 @@ public class WallNutCard extends Card{
         int[] newPosition = new int[2];
         newPosition[0] = 0;
         newPosition[1] = 0;
-        if (getGameState().getMoney() >= getValue())
+        if (getGameState().getMoney() >= getValue() && !isUsed())
             getGameState().setSelectedPlant(new WallNut(newPosition, getGameState()));
     }
 

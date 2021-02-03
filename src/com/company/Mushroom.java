@@ -1,9 +1,14 @@
 package com.company;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.TimerTask;
-
+/**
+ * This is Mushroom class.its a kind of Shooter plants.
+ * It handles the works related to This type of shooter plant.
+ * It extends shooter class.
+ * This plant throw suitable bullet for killing zombies
+ *
+ * @version 1.0
+ * @author Mahdi Rahmani & Nami Modarressi
+ */
 public class Mushroom extends Shooter{
 
     /**
@@ -24,37 +29,7 @@ public class Mushroom extends Shooter{
      */
     @Override
     public void action() {
-       /* super.action();
-        int[] bulletFirstPos = new int[2];
-        bulletFirstPos[0] = getPosition()[0] + 20;
-        bulletFirstPos[1] = getPosition()[1] + 30;
-        MushroomBullet mushroomBullet = new MushroomBullet(bulletFirstPos, getGameState());
-        throwBullet(mushroomBullet);*/
         throwBullet();
-        /*TimerTask Task = new TimerTask() {
-            @Override
-            public void run()
-            {
-                HashMap<Integer,Elements> myElement = new HashMap<>();
-                for (int i = 0; i<getGameState().getElements().size(); i++)
-                {
-                    myElement.put(i, getGameState().getElements().get(i));
-                }
-                Iterator<Integer> key = myElement.keySet().iterator();
-                while (key.hasNext()) {
-                    Integer thisKey = key.next();
-                    if (getPosition()[1] + 5 == myElement.get(thisKey).getPosition()[1] && myElement.get(thisKey) instanceof Zombie){
-                        int[] bulletFirstPos = new int[2];
-                        bulletFirstPos[0] = getPosition()[0] + 20;
-                        bulletFirstPos[1] = getPosition()[1] + 30;
-                        MushroomBullet mushroomBullet = new MushroomBullet(bulletFirstPos, getGameState());
-                        getGameState().addElement(mushroomBullet);
-                    }
-                }
-
-            }
-        };
-        getTimer().schedule(Task, 200, 2000);*/
 
     }
 }

@@ -8,7 +8,7 @@ package com.company;
  * @version 1.0
  * @author Mahdi Rahmani  & Nami Modarresi
  */
-public class Character extends Elements{
+public  class Character extends Elements{
     // The health point field
     private int HP;
     //The speed of character(zombie & bullet & lawn mower can move and have speed)
@@ -135,6 +135,10 @@ public class Character extends Elements{
         return null;
     }
 
+    /**
+     * this is an overridden method of element class
+     * in this method we control the move of characters
+     */
     @Override
     public void update() {
         move();
@@ -148,8 +152,10 @@ public class Character extends Elements{
         newPos[0] -= speed;
         setPosition(newPos);
     }
-    public void action()
-    {
 
-    }
+    /**
+     * this method is overridden in subclasses
+     */
+    public void action(){}
+
 }

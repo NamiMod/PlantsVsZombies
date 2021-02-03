@@ -27,7 +27,6 @@ public class Sun extends Elements{
     private SunState sunState;
     //The destination of sun
     private int destination;
-    private GameState state;
 
     /**
      * This is the first constructor of this class
@@ -41,7 +40,6 @@ public class Sun extends Elements{
         super(position, "sun.gif", gameState, 50, 50);
         sunState = SunState.FALLING;
         destination = position[1];
-        state=gameState;
     }
 
     /**
@@ -55,7 +53,6 @@ public class Sun extends Elements{
     public Sun(MapCell mapCell, GameState gameState) {
         super(new int[]{mapCell.getPosition()[0],-3}, "sun.gif",gameState, 70, 70);
         destination = mapCell.getPosition()[1];
-        state=gameState;
     }
 
     /**
@@ -104,10 +101,10 @@ public class Sun extends Elements{
     @Override
     public void clickAction() {
         super.clickAction();
-        if (state.getGameSetting().getSound() == 0) {
+        if (getGameState().getGameSetting().getSound() == 0) {
             playSound();
         }
-        getGameState().setMoney(getGameState().getMoney() + 250);
+        getGameState().setMoney(getGameState().getMoney() + 25);
     }
     /**
      * sound for collecting sun !!!

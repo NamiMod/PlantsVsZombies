@@ -13,6 +13,8 @@ public class GameController {
     private GameState state;
     //The step of the game
     private int step;
+    //The positions of cards
+    private int[][] cardsPosition;
 
     /**
      * level constructor
@@ -21,6 +23,7 @@ public class GameController {
     public GameController(GameState state) {
         this.state = state;
         zombies_Y_Pos = new int[]{80, 175, 270, 365, 460};
+        cardsPosition = new int[][]{{70,10 },{123,10},{176,10},{229,10},{282,10},{335,10}};
         step = 1;
 
     }
@@ -44,19 +47,15 @@ public class GameController {
 
 
         //adding the flowers
+        /*
         int[] sunFlowerCardFirstPos = new int[]{70,10};
         int[] peaShooterCardFirstPos = new int[]{123,10};
         int[] snowPeaShooterCardFirstPos = new int[]{176,10};
         int[] mushroomCardFirstPos = new int[]{229,10};
         int[] wallNutCardsFirstPos = new int[]{282,10};
         int[] cherryBombCardsFirstPos = new int[]{335,10};
-
-        state.addElement(new SunFlowerCard(sunFlowerCardFirstPos, state));
-        state.addElement(new PeaShooterCard(peaShooterCardFirstPos, state));
-        state.addElement(new SnowPeaShooterCard(snowPeaShooterCardFirstPos, state));
-        state.addElement(new MushroomCard(mushroomCardFirstPos, state));
-        state.addElement(new WallNutCard(wallNutCardsFirstPos, state));
-        state.addElement(new CherryBombCard(cherryBombCardsFirstPos, state));
+        */
+        setGameCards(state.getGameSetting().getCardNames());
 
         //adding shovel
         int[] shovelFirstPos = new int[]{120,500};
@@ -65,9 +64,76 @@ public class GameController {
         //adding menu button
         int[] menuPos = new int[]{40,450};
         state.addElement(new GameMenuButton(menuPos,150,40,state));
-
     }
 
+    /**
+     * set the game cards
+     * this method get a list of card names and make new cards
+     * @param cardNames the name of cards
+     */
+    public void setGameCards(ArrayList<String> cardNames)
+    {
+        int index = 0;
+        if (cardNames.contains("SunFlower")){
+            Card card = new SunFlowerCard(cardsPosition[index], state,state.getGameSetting().getChargingCardTime()[0]);
+            state.addElement(card);
+            state.addCard("SunFlower", card);
+            index++;
+        }
+        if (cardNames.contains("WallNut"))
+        {
+            Card card = new WallNutCard(cardsPosition[index], state ,state.getGameSetting().getChargingCardTime()[1]);
+            state.addElement(card);
+            state.addCard("WallNut", card);
+            index++;
+
+        }
+        if (cardNames.contains("PeaShooter"))
+        {
+            Card card = new PeaShooterCard(cardsPosition[index], state ,state.getGameSetting().getChargingCardTime()[2]);
+            state.addElement(card);
+            state.addCard("PeaShooter", card);
+            index++;
+
+        }
+        if (cardNames.contains("SnowPeaShooter"))
+        {
+            Card card = new SnowPeaShooterCard(cardsPosition[index], state ,state.getGameSetting().getChargingCardTime()[3]);
+            state.addElement(card);
+            state.addCard("SnowPeaShooter", card);
+            index++;
+
+        }
+        if (cardNames.contains("Repeater"))
+        {
+            Card card = new RepeaterCard(cardsPosition[index], state ,state.getGameSetting().getChargingCardTime()[4]);
+            state.addElement(card);
+            state.addCard("Repeater", card);
+            index++;
+        }
+        if (cardNames.contains("Mushroom"))
+        {
+            Card card = new MushroomCard(cardsPosition[index], state ,state.getGameSetting().getChargingCardTime()[5]);
+            state.addElement(card);
+            state.addCard("Mushroom", card);
+            index++;
+        }
+        if (cardNames.contains("CherryBomb"))
+        {
+            Card card = new CherryBombCard(cardsPosition[index], state ,state.getGameSetting().getChargingCardTime()[6]);
+            state.addElement(card);
+            state.addCard("CherryBomb", card);
+            index++;
+        }
+        if (cardNames.contains("Beetroot"))
+        {
+            Card card = new CherryBombCard(cardsPosition[index], state ,state.getGameSetting().getChargingCardTime()[7]);
+            state.addElement(card);
+            state.addCard("Beetroot", card);
+            index++;
+        }
+
+    }
 
     /**
      * check whether a step is completed or not
@@ -181,7 +247,7 @@ public class GameController {
             case 5:
             {
                 if (state.getDeadZombies() >= 30){
-                    //WINNER
+                    state.setGameOver(true);
                 }
             }
         }
@@ -198,7 +264,7 @@ public class GameController {
         //we dont know which row the zombie is coming inside (it is random)
         int randomY = zombies_Y_Pos[random.nextInt(5)];
         //The type of the coming zombie is also random
-        int randomType = random.nextInt(3);
+        int randomType = random.nextInt(4);
         //we should set the first position of zombie
         int[] zombieFirstPosition = new int[]{1050 , randomY};
 
@@ -213,6 +279,9 @@ public class GameController {
                 break;
             case 2:
                 zombie = new BucketHeadZombie(zombieFirstPosition, state.getGameSetting().getZombieSpeed()[2], state.getGameSetting().getZombieAttackPower()[2], state);
+                break;
+            case 3:
+                zombie = new FootBallPlayerZombie(zombieFirstPosition, state.getGameSetting().getZombieSpeed()[3], state.getGameSetting().getZombieAttackPower()[3], state);
                 break;
         }
         state.addElement(zombie);

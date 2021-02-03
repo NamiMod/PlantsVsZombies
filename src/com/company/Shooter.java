@@ -17,8 +17,6 @@ import java.util.TimerTask;
  * @author Mahdi Rahmani & Nami Modarressi
  */
 public class Shooter extends Plant{
-
-    private GameState state ;
     /**
      * This is the constructor of this class.
      * Creat a new Plant with a given position , cost , HP , elementPath
@@ -29,7 +27,6 @@ public class Shooter extends Plant{
      */
     public Shooter(int[] position , int cost, int HP, String elementPath, GameState gameState) {
         super(position , cost, HP , elementPath,gameState);
-        this.state=gameState;
     }
 
     /**
@@ -52,7 +49,7 @@ public class Shooter extends Plant{
                 while (key.hasNext()) {
                     Integer thisKey = key.next();
                     if (getPosition()[1] + 5 == myElement.get(thisKey).getPosition()[1] && myElement.get(thisKey) instanceof Zombie){
-                        if (state.getGameSetting().getSound() == 0) {
+                        if (getGameState().getGameSetting().getSound() == 0) {
                             playSound();
                         }
                         int[] bulletFirstPos = new int[2];
@@ -68,6 +65,8 @@ public class Shooter extends Plant{
                             bullet1 = new Pea(bulletFirstPos, getGameState());
                         }else if (thisShooter instanceof SnowPeaShooter){
                             bullet1 = new FrozenPea(bulletFirstPos, getGameState());
+                        }else if (thisShooter instanceof Beetroot){
+                            bullet1 = new BeetBullet(bulletFirstPos, getGameState());
                         }else if (thisShooter instanceof Repeater) {
                             bullet1 = new Pea(bulletFirstPos, getGameState());
                             int[] secondBulletFirstPos = new int[2];
@@ -84,21 +83,6 @@ public class Shooter extends Plant{
             }
         };
         getTimer().schedule(Task, 200, 2000);
-        /*getTimer().schedule(Task, 200, 2000);
-        TimerTask Task = new TimerTask() {
-            @Override
-            public void run()
-            {
-                for (Elements elements : getGameState().getElements())
-                {
-                    if (getPosition()[1] + 5 == elements.getPosition()[1] && elements instanceof Zombie) {
-                        getGameState().addElement(bullet);
-                    }
-                }
-
-            }
-        };
-        getTimer().schedule(Task, 200, 2000);*/
     }
     /**
      * shooting sound !!!

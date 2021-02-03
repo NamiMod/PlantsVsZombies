@@ -8,8 +8,8 @@ public class SnowPeaShooterCard extends Card{
      * @param position    the x&y coordinates
      * @param gameState   the game state
      */
-    public SnowPeaShooterCard(int[] position, GameState gameState) {
-        super(position, "cards/IcedIcedpeachooter2.png", "cards/Snow_Pea_(HD_size).png", gameState, 175);
+    public SnowPeaShooterCard(int[] position, GameState gameState, int chargingTime) {
+        super(position, "cards/IcedIcedpeachooter2.png", "cards/Snow_Pea_(HD_size).png", gameState, 175,chargingTime);
     }
 
     /**
@@ -22,7 +22,7 @@ public class SnowPeaShooterCard extends Card{
         int[] newPosition = new int[2];
         newPosition[0] = 0;
         newPosition[1] = 0;
-        if (getGameState().getMoney() >= getValue())
+        if (getGameState().getMoney() >= getValue() && !isUsed())
             getGameState().setSelectedPlant(new SnowPeaShooter(newPosition, getGameState()));
     }
 

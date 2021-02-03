@@ -7,9 +7,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.awt.Cursor;
+import java.util.HashMap;
 import java.util.Iterator;
 
 /**
@@ -33,7 +33,7 @@ import java.util.Iterator;
 
 //Todo : Game setting  *****************************
 
-public class GameState implements Serializable {
+public class GameState {
     //The handler related to mouse
     private MouseHandler mouseHandler;
     //The
@@ -61,21 +61,28 @@ public class GameState implements Serializable {
 
     //The message address
     private String messageAddress;
+
     //the controller of game
     private GameController gameController;
+
     //private CardsPicker pointedPicker;
     private boolean pointingToPicker ;
+
     //The boolean variable to show if the shovel is chosen or not
     private boolean isShovelSelected ;
+
     //The number of dead zombies
     private int deadZombies;
+
     //The score of player
     private int score;
+
     //the game setting
     private GameSetting gameSetting;
-    private GameFrame frame;
-    private int sound = 0;
 
+    private HashMap<String,Card> cards;
+
+    private GameFrame frame;
     /**
      * set first value of parameters
      */
@@ -94,9 +101,8 @@ public class GameState implements Serializable {
         if (gameSetting.getSound() == 0){
             playSoundGame();
         }
+        cards = new HashMap<>();
     }
-
-
     public GameFrame getFrame() {
         return frame;
     }
@@ -268,6 +274,24 @@ public class GameState implements Serializable {
     }
 
     /**
+     * put a new card to the list of cards
+     * @param name name of card
+     * @param card the card object
+     */
+    public void addCard(String name , Card card)
+    {
+        cards.put(name, card);
+    }
+
+    /**
+     * get the cards of this game
+     * @return
+     */
+    public HashMap<String, Card> getCards() {
+        return cards;
+    }
+
+    /**
      * In this method we update state to next state
      */
     public void update() {
@@ -385,6 +409,12 @@ public class GameState implements Serializable {
         }
 
     }
+    private AudioInputStream as2= AudioSystem.getAudioInputStream(new File("./PVS Design Kit/sounds/background.wav"));
+    private AudioFormat af2 = as2.getFormat();
+    private Clip clip2 = AudioSystem.getClip();
+    private DataLine.Info info2 = new DataLine.Info(Clip.class, af2);
+    private Line line2 = AudioSystem.getLine(info2);
+
     /**
      * play music
      * @throws IOException cant open music
@@ -392,12 +422,6 @@ public class GameState implements Serializable {
      * @throws LineUnavailableException cant track data of file
      */
     public void playSoundGame() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
-
-        AudioInputStream as2= AudioSystem.getAudioInputStream(new File("./PVS Design Kit/sounds/background.wav"));
-        AudioFormat af2 = as2.getFormat();
-        Clip clip2 = AudioSystem.getClip();
-        DataLine.Info info2 = new DataLine.Info(Clip.class, af2);
-        Line line2 = AudioSystem.getLine(info2);
 
         if ( ! line2.isOpen() )
         {
@@ -409,7 +433,7 @@ public class GameState implements Serializable {
     }
 
     public void stop(){
-       // clip2.stop();
+        clip2.stop();
     }
 
 }

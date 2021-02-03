@@ -1,10 +1,6 @@
 package com.company;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
 
 /**
  * This is element class. the character class extends from this class
@@ -13,17 +9,23 @@ import java.io.Serializable;
  * @version 1.0
  * @author Mahdi Rahmani  & Nami Modarresi
  */
-public class Elements implements Serializable {
+public class Elements {
+
     //The position field
     private int [] position;
+
     //The path of gif or image
     private String elementPath;
+
     //The game state of game
     private GameState gameState;
+
     //The width of the image or gif that we using
     private int width;
+
     //The height of the image or gif that we using
     private int height;
+
     //The Image or gif of the object
     private Image image;
 
@@ -103,12 +105,16 @@ public class Elements implements Serializable {
         return width;
     }
 
+    /**
+     * this method is overridden by subclasses
+     * if we call this method it can update the element
+     */
+    public void update(){}
 
-    public void update()
-    {
-
-    }
-
+    /**
+     * set the image or gif of the element
+     * @param image the image
+     */
     public void setImage(Image image) {
         this.image = image;
     }
@@ -122,13 +128,21 @@ public class Elements implements Serializable {
         g2d.drawImage(image, position[0], position[1], width, height, null);
     }
 
+    /**
+     * this method is used for any object that can disappear after a specific time
+     */
     public void selfDestruction() {
         gameState.deleteElements(this);
     }
-    public void clickAction(){
-    }
 
-    public void remove(){
+    /**
+     * this method is overridden by subclasses
+     * it checks if user click on something and do a suitable action
+     */
+    public void clickAction(){}
 
-    }
+    /**
+     * this method is overridden by subclasses
+     */
+    public void remove(){}
 }

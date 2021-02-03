@@ -41,8 +41,6 @@ public class Zombie extends Character{
     private Timer freezeTimer ;
     //This variable tell us for example is the cone head zombie change to normal zombie or not for one time
     private boolean isChanged;
-
-    private GameState state;
     /**
      * This is constructor of this class
      * It calls the constructor of superclass and pass the needed argument as an entry
@@ -64,7 +62,6 @@ public class Zombie extends Character{
         unfreeze = null;
         freezeTimer = new Timer();
         isChanged = false;
-        state=gameState;
     }
 
     /**
@@ -97,7 +94,7 @@ public class Zombie extends Character{
      * we change his state and update it with this method
      */
     @Override
-     public void update() {
+    public void update() {
         // we check if the Hp of two types of zombies is less than 200 then we should change them to normal zombie
         if (this instanceof BucketHeadZombie || this instanceof ConeHeadZombie)
         {
@@ -122,11 +119,11 @@ public class Zombie extends Character{
             if (coincidence != null) {
                 zombieState = ZombieState.CHEWING;
                 chewTimerTask = new TimerTask() {
-                        @Override
-                        public void run() {
-                            coincidence.hurt(attackPower);
-                        }
-                    };
+                    @Override
+                    public void run() {
+                        coincidence.hurt(attackPower);
+                    }
+                };
                 chewTimer.schedule(chewTimerTask, 0L, 500L);
             }
         }
@@ -135,7 +132,7 @@ public class Zombie extends Character{
             // Chewing
             Plant coincidence = getCollidedPlant();
             if (coincidence == null) {
-                if (state.getGameSetting().getSound() == 0) {
+                if (getGameState().getGameSetting().getSound() == 0) {
                     playSound();
                 }
                 zombieState = ZombieState.WALKING;

@@ -28,7 +28,6 @@ public class SunFlower extends SunPlant{
      */
     @Override
     public void action() {
-        super.action();
         produceSun();
     }
 }

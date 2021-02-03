@@ -42,7 +42,7 @@ public class Server {
         }
     }
     public void start() throws IOException {
-        serversocket = new ServerSocket(5058);
+        serversocket = new ServerSocket(5060);
         System.out.println("Connection Starting on port:" + serversocket.getLocalPort());
         while (true) {
             Socket client = serversocket.accept();
@@ -110,16 +110,16 @@ public class Server {
         if (code.equals("4")) {
             // update score
             String username = input.readLine();
-            int mode = input.read();
-            int WinOrLose = input.read();
+            int mode = Integer.parseInt(input.readLine());
+            int WinOrLose = Integer.parseInt(input.readLine());
 
             if (mode == 0) {
 
                 if (WinOrLose == 0) {
-                    file.updateScore(username,3,1,0,1,0);
+                    file.updateScore(username, 3, 1, 0, 1, 0);
+                } else {
+                    file.updateScore(username, -1, 0, 1, 1, 0);
                 }
-            } else {
-                file.updateScore(username,-1,0,1,1,0);
             }
 
             if (mode == 1) {

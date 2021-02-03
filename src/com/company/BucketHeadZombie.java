@@ -21,6 +21,6 @@ public class BucketHeadZombie extends Zombie{
      *                    bucketheadzombie.gif
      */
     public BucketHeadZombie(int[] position, int speed, int attackPower , GameState gameState) {
-        super(position, 1300, speed, attackPower, "Buckethead-Zombie.gif" , gameState);
+        super(position, 1300, speed, attackPower, " bucketheadzombie.gif" , gameState);
     }
 }
