@@ -15,12 +15,18 @@ public class Beetroot extends Shooter{
      * Creat a new Plant with a given position , cost , HP , elementPath
      *
      * @param position    the x & y coordinates
-     * @param cost        the cost of this plant
-     * @param HP          The health point
-     * @param elementPath the path of element gif or image
-     * @param gameState
+     * @param gameState   the game state
      */
-    public Beetroot(int[] position, int cost, int HP, String elementPath, GameState gameState) {
-        super(position, cost, HP, elementPath, gameState);
+    public Beetroot(int[] position, GameState gameState) {
+        super(position,  125, 80 ,"beetroot.gif", gameState);
+    }
+    /**
+     * If the zombies are coming across this type of plant we call this method to do the best action
+     * It creates bullet for killing zombies
+     * This plant create beetBullet
+     */
+    @Override
+    public void action() {
+        throwBullet();
     }
 }
