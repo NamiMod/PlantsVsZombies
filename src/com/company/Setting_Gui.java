@@ -38,6 +38,7 @@ public class Setting_Gui {
     private JCheckBox hard;
     private JButton change;
     private JButton save;
+    private JButton plants;
     private GameSetting game_info;
 
     private AudioInputStream as1 = AudioSystem.getAudioInputStream(new File("./PVS Design Kit/sounds/menu.wav"));
@@ -155,8 +156,34 @@ public class Setting_Gui {
         hard.setSize(300, 100);
         hard.setFont(new Font("Arial", Font.BOLD, 20));
         Home.add(hard);
+
+        plants = new JButton("Plants");
+        plants.setLocation(50,500);
+        plants.setSize(400,50);
+        plants.setForeground(Color.BLACK);
+        plants.setFont(new Font("Arial", Font.BOLD, 20));
+        plants.setOpaque(false);
+        plants.setContentAreaFilled(false);
+        plants.setBorderPainted(true);
+        plants.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Home.dispose();
+                clip1.stop();
+                try {
+                    Plants_Gui next = new Plants_Gui(game_info);
+                } catch (LineUnavailableException lineUnavailableException) {
+                    lineUnavailableException.printStackTrace();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                } catch (UnsupportedAudioFileException unsupportedAudioFileException) {
+                    unsupportedAudioFileException.printStackTrace();
+                }
+            }
+        });
+        Home.add(plants);
         save = new JButton("Save and Back to Menu");
-        save.setLocation(50, 500);
+        save.setLocation(50, 550);
         save.setSize(400, 50);
         save.setForeground(Color.BLACK);
         save.setFont(new Font("Arial", Font.BOLD, 20));
