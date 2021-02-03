@@ -120,8 +120,16 @@ public class Load_Gui {
             public void actionPerformed(ActionEvent e) {
                 Home.dispose();
                 clip1.stop();
-                JOptionPane.showMessageDialog(Home,"Loading complete","",JOptionPane.PLAIN_MESSAGE);
-                // load save and go to game
+                FileHandler file = new FileHandler();
+                Game game = new Game();
+                GameState state = null;
+                state = file.load(number.getText());
+                state.setRun(true);
+                for (Elements elements:state.getElements()){
+                    System.out.println(elements.getClass());
+                }
+                game.start(state , true);
+
             }
         });
         Home.add(load);
@@ -142,9 +150,11 @@ public class Load_Gui {
             public void actionPerformed(ActionEvent e) {
                 Home.dispose();
                 clip1.stop();
-                FileHandler p = new FileHandler();
-                Game game = new Game();
-                game.start(p.load(new File("salam.PVZ")));
+                try {
+                    Menu_Gui next = new Menu_Gui(game_info);
+                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException unsupportedAudioFileException) {
+                    unsupportedAudioFileException.printStackTrace();
+                }
             }
         });
         Home.add(menu);

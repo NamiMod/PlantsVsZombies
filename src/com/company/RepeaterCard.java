@@ -9,7 +9,7 @@ public class RepeaterCard extends Card{
      * @param gameState   the game state
      */
     public RepeaterCard(int[] position, GameState gameState, int chargingTime) {
-        super(position, "cards/repeaterCard.jpg", "repeaterCursor.png", gameState, 150,chargingTime);
+        super(position, "cards/icedrepeaterCard.jpg", "repeaterCursor.png", gameState, 150,chargingTime);
     }
 
     /**

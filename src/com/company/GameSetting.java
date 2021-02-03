@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -20,14 +21,13 @@ import java.util.ArrayList;
  *
  *
  */
-public class GameSetting {
+public class GameSetting implements Serializable {
 
     private int sound;
     private int mode;
     private String username;
     private String password;
 
-    // ToDo : change the values of parameters of game related to Normal or Hard mode
 
     //The zombie speeds (1:normal zombie; 2:conHead zombie; 3:bucketHead zombie)
     private int[] zombieSpeed;
@@ -158,6 +158,10 @@ public class GameSetting {
         return chargingCardTime;
     }
 
+    /**
+     * get card names
+     * @return card names
+     */
     public ArrayList<String> getCardNames() {
         return cardNames;
     }
@@ -192,7 +196,6 @@ public class GameSetting {
 
     }
 
-    // ToDo : must be edited
     /**
      * set the Hard state
      */

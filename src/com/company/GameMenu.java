@@ -1,5 +1,12 @@
 package com.company;
-
+/**
+ * This is Game Menu class.
+ *
+ * in this class we create menu for game
+ *
+ * @version 1.0
+ * @author Mahdi Rahmani & Nami Modarressi
+ */
  import javax.imageio.ImageIO;
  import javax.sound.sampled.LineUnavailableException;
  import javax.sound.sampled.UnsupportedAudioFileException;
@@ -104,6 +111,7 @@ public class GameMenu  {
                             frame.dispose();
                             state.getFrame().dispose();
                             state.stop();
+                            state.setRun(false);
                             Menu_Gui q = new Menu_Gui(state.getGameSetting());
                         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException unsupportedAudioFileException) {
                             unsupportedAudioFileException.printStackTrace();
@@ -112,11 +120,17 @@ public class GameMenu  {
                     if (continueButton.contains(e.getPoint())) {
                         FileHandler file = new FileHandler();
                         try {
-                            frame.dispose();
-                            state.getFrame().dispose();
-                            state.stop();
-                            Menu_Gui q = new Menu_Gui(state.getGameSetting());
-                            file.save("salam",state);
+                            String name = JOptionPane.showInputDialog("Enter Save's Name :");
+                            if (!name.equals("")) {
+                                file.save(state.getGameSetting().getUsername()+name,state);
+                                frame.dispose();
+                                state.getFrame().dispose();
+                                state.stop();
+                                state.setRun(false);
+                                Menu_Gui q = new Menu_Gui(state.getGameSetting());
+                            }else {
+                                JOptionPane.showMessageDialog(null,"Error in saving file","Error",JOptionPane.ERROR_MESSAGE);
+                            }
                         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException unsupportedAudioFileException) {
                             unsupportedAudioFileException.printStackTrace();
                         }

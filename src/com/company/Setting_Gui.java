@@ -208,6 +208,7 @@ public class Setting_Gui {
                         if (normal.isSelected()){
                             game_info.setMode(0);
                         }
+                        game_info.NormalHardInit();
                         clip1.stop();
                         Home.dispose();
                         Menu_Gui next = new Menu_Gui(game_info);

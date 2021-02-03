@@ -1,6 +1,12 @@
 package com.company;
-
-import javax.swing.*;
+/**
+ * This is Game Menu Button class.
+ *
+ * in this class we create new button to show menu
+ *
+ * @version 1.0
+ * @author Mahdi Rahmani & Nami Modarressi
+ */
 
 /**
  * creating the button of the menu in the gameFrame
@@ -13,10 +19,10 @@ public class GameMenuButton extends Elements {
 
     /**
      * menuButton constructor
-     * @param pos
-     * @param width
-     * @param height
-     * @param gameState
+     * @param pos position
+     * @param width width
+     * @param height height
+     * @param gameState game state
      */
     GameMenuButton(int[] pos, int width, int height, GameState gameState) {
         super(pos, "menu.jpg", gameState , width, height);

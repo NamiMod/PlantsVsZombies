@@ -132,7 +132,9 @@ public class User implements Serializable {
      */
     @Override
     public String toString(){
-        return (username+"                       "+score+"       "+win+"       "+lose+"       "+normalGames+"      "+hardGames+"\n");
+
+        return String.format("    %10s     %10d    %10d    %10d    %10d    %10d\n",username,score,win,lose,normalGames,hardGames);
+
     }
 
 }

@@ -1,4 +1,6 @@
 package com.company;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -222,7 +224,7 @@ public class FileHandler {
      * change username of password if it's possible
      *
      *
-     * @param s
+     * @param s old password
      * @param username    old username
      * @param newUsername new username
      * @param newPassword new password
@@ -427,34 +429,63 @@ public class FileHandler {
     }
 
     /**
+     * back up game state
+     * @param gameSetting game setting
+     * @param state game state
+     * @return back up of game state
+     * @throws UnsupportedAudioFileException cant read sound
+     * @throws IOException cant read file
+     * @throws LineUnavailableException cant trace sound
+     */
+    public GameState ElementsBackUp(GameSetting gameSetting , GameState state) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        GameState game = new GameState(gameSetting);
+        game.stop();
+        game.setElements(state.getElements());
+        game.setMoney(state.getMoney());
+        game.setMapCells(state.getMapCells());
+        game.setFrame(state.getFrame());
+        return game;
+    }
+
+    /**
      * in this method we can save game to file
      */
-    public void save(String name , GameState state){
+    public void save(String name , GameState state) {
 
-        try (FileOutputStream fs = new FileOutputStream("saves"+name + ".PVZ")){
-            ObjectOutputStream  os = new ObjectOutputStream(fs);
-            os.writeObject(state);
+        String fileAddress = "saves/" + name + ".ser";
+        WriteObjectToFile write = null;
+        try {
+            write = new WriteObjectToFile(fileAddress);
+            write.writeToFile(ElementsBackUp(state.getGameSetting(), state));
+            write.closeConnection();
 
-        } catch (IOException e) {
+        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
             e.printStackTrace();
         }
+
     }
 
     /**
      * in this method we can load game from file with fileName
-     * @param file name of save
      */
-    public GameState load(File file){
-        //GameState result = new GameState();
-        try (FileInputStream fs = new FileInputStream(file)){
-            ObjectInputStream os = new ObjectInputStream(fs);
+    public GameState load(String name){
 
-            return (GameState) os.readObject();
-        } catch (IOException | ClassNotFoundException e) {
+        GameState result = null;
+        String fileAddress = "saves/" + name + ".ser";
+        try {
+            ReadObjectFromFile read = new ReadObjectFromFile(fileAddress);
+                try {
+                    GameState game = (GameState) read.readFromFile();
+                    result = game;
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            read.closeConnection();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
-    }
+        return result;
 
+    }
 
 }

@@ -41,8 +41,13 @@ public class Server {
             e.printStackTrace();
         }
     }
+
+    /**
+     * start server
+     * @throws IOException cant read files
+     */
     public void start() throws IOException {
-        serversocket = new ServerSocket(5060);
+        serversocket = new ServerSocket(5061);
         System.out.println("Connection Starting on port:" + serversocket.getLocalPort());
         while (true) {
             Socket client = serversocket.accept();
@@ -60,6 +65,12 @@ public class Server {
         System.out.println("End");
         serversocket.close();
     }
+
+    /**
+     * handle request
+     * @return result
+     * @throws IOException cant read files
+     */
 
     public int handle() throws IOException {
 
@@ -148,6 +159,10 @@ public class Server {
 
     }
 
+    /**
+     * end of server
+     * @throws IOException cant read file
+     */
     public void close() throws IOException {
         serversocket.close();
     }

@@ -116,16 +116,14 @@ public class Card extends Elements{
             if (getGameState().getMoney() >= value) {
                 newState = true;
                 if (newState && !imageIsChanged) {
-                    Image image = Main.loadImage(fullCard);
-                    setImage(image);
+                    setElementPath(fullCard);
                     imageIsChanged = true;
                     System.out.println("The flower is charged");
                 }
             } else {
                 newState = false;
                 if (!newState && imageIsChanged) {
-                    Image image = Main.loadImage(notChargedCard);
-                    setImage(image);
+                    setElementPath(notChargedCard);
                     imageIsChanged = false;
                     System.out.println("The flower is uncharged");
 
@@ -134,8 +132,7 @@ public class Card extends Elements{
             }
         }
         else {
-            Image image = Main.loadImage(notChargedCard);
-            setImage(image);
+            setElementPath(notChargedCard);
             imageIsChanged = false;
         }
     }

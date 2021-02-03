@@ -1,5 +1,22 @@
 package com.company;
 
+/**
+ *  -- Main --
+ *
+ * main class of game
+ *
+ * project : Plants Vs Zombies
+ * AP Final Project
+ *
+ * ###############################
+ * @author Seyed Nami Modarressi #
+ * @author Mahdi Rahmani         #
+ * @since 2020                   #
+ * @version 1.0                  #
+ * ###############################
+ *
+ *
+ */
 import javax.imageio.ImageIO;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -18,11 +35,7 @@ public class Main {
 
         public static void main(String[] args) throws IOException, InterruptedException, LineUnavailableException, UnsupportedAudioFileException {
 
-            //Plants_Gui p = new Plants_Gui(new GameSetting());
-            Click_To_Start_GUI p = new Click_To_Start_GUI();
-            //Menu_Gui p = new Menu_Gui(new GameSetting());
-
-
+           Loading_Gui start =  new Loading_Gui();
 
         }
 

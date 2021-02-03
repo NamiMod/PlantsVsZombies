@@ -24,8 +24,15 @@ public class UpdateScoreRequest {
     private BufferedReader read;
     private PrintWriter output;
 
+    /**
+     * send request
+     * @param username username
+     * @param mode mode
+     * @param WinOrLose win or lose
+     * @throws IOException cant read file
+     */
     public void start(String username , int mode , int WinOrLose) throws IOException {
-        socket = new Socket("127.0.0.1", 5060);
+        socket = new Socket("127.0.0.1", 5061);
         output = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
         read = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         try {
@@ -41,9 +48,9 @@ public class UpdateScoreRequest {
     /**
      * mode :  0 -> normal   1 -> hard
      * win or lose : 0 -> win   1 -> lose
-     * @param username
-     * @param mode
-     * @param WinOrLose
+     * @param username username
+     * @param mode mode
+     * @param WinOrLose win or lose of game
      */
     public void updateScore(String username , int mode , int WinOrLose){
         output.println("4");
@@ -53,6 +60,10 @@ public class UpdateScoreRequest {
         output.flush();
     }
 
+    /**
+     * close request
+     * @throws IOException
+     */
     public void close() throws IOException {
         socket.close();
         read.close();

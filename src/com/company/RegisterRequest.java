@@ -24,8 +24,15 @@ public class RegisterRequest {
     private BufferedReader read;
     private PrintWriter output;
 
+    /**
+     * sent request
+     * @param username username
+     * @param password password
+     * @return result
+     * @throws IOException cant read file
+     */
     public int start(String username , String password) throws IOException {
-        socket = new Socket("127.0.0.1", 5060);
+        socket = new Socket("127.0.0.1", 5061);
         output = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
         read = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         try {
@@ -40,6 +47,12 @@ public class RegisterRequest {
         }
     }
 
+    /**
+     * @param username username
+     * @param password password
+     * @return result
+     * @throws IOException cant read file
+     */
     public int register(String username , String password) throws IOException {
         output.println("1");
         output.println(username);
@@ -48,6 +61,11 @@ public class RegisterRequest {
         String response = read.readLine();
         return Integer.parseInt(response);
     }
+
+    /**
+     * close request
+     * @throws IOException cant read file
+     */
     public void close() throws IOException {
         socket.close();
         read.close();

@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *  -- plants Gui --
@@ -48,8 +49,11 @@ public class Plants_Gui {
     private JLabel mushRoom;
     private JCheckBox mushroom;
 
-    // repeater
-    // beet
+    private JLabel Repeater;
+    private JCheckBox repeater;
+
+    private JLabel Beetroot;
+    private JCheckBox beetroot;
 
     private GameSetting game_info;
 
@@ -59,8 +63,15 @@ public class Plants_Gui {
     private DataLine.Info info = new DataLine.Info(Clip.class, af);
     private Line line1 = AudioSystem.getLine(info);
 
+    /**
+     * create new page
+     * @param game game setting
+     * @throws LineUnavailableException  cant trace sound
+     * @throws IOException cant read file
+     * @throws UnsupportedAudioFileException cant read sound
+     */
     public Plants_Gui(GameSetting game) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-        this.game_info = game_info;
+        this.game_info = game;
         Home = new JFrame("Plants Vs. Zombies");
         Home.setSize(1200, 740);
         Home.setLocationRelativeTo(null);
@@ -74,6 +85,10 @@ public class Plants_Gui {
             playSound();
         }
     }
+
+    /**
+     * add elements to frame
+     */
     public void addElement(){
 
         sunPlant = new JLabel();
@@ -143,6 +158,31 @@ public class Plants_Gui {
         mushroom.setLocation(420,275);
         Home.add(mushroom);
 
+
+        Repeater = new JLabel();
+        Repeater.setLocation(50,350);
+        Repeater.setSize(100,100);
+        Repeater.setIcon(new ImageIcon("./PVS Design Kit/images/Cards/repeaterCard.jpg"));
+        Home.add(Repeater);
+
+        repeater = new JCheckBox("Repeater");
+        repeater.setSize(150,50);
+        repeater.setLocation(120,375);
+        Home.add(repeater);
+
+
+        Beetroot = new JLabel();
+        Beetroot.setLocation(350,350);
+        Beetroot.setSize(100,100);
+        Beetroot.setIcon(new ImageIcon("./PVS Design Kit/images/Cards/BeetRootCard.png"));
+        Home.add(Beetroot);
+
+        beetroot = new JCheckBox("Beetroot");
+        beetroot.setSize(150,50);
+        beetroot.setLocation(420,375);
+        Home.add(beetroot);
+
+
         save = new JButton("Save and Back to Menu");
         save.setLocation(50, 550);
         save.setSize(400, 50);
@@ -156,32 +196,49 @@ public class Plants_Gui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int counter = 0;
+                ArrayList<String> plants = new ArrayList<String>();
 
                 if (sun_plant.isSelected()){
                     counter+=1;
+                    plants.add("SunFlower");
                 }
                 if (pea_shooter.isSelected()){
                     counter+=1;
+                    plants.add("PeaShooter");
                 }
                 if (snow_pea.isSelected()){
                     counter+=1;
+                    plants.add("SnowPeaShooter");
                 }
                 if (wall_nut.isSelected()){
                     counter+=1;
+                    plants.add("WallNut");
                 }
                 if (cherry_bomb.isSelected()){
                     counter+=1;
+                    plants.add("CherryBomb");
                 }
                 if (mushroom.isSelected()){
                     counter+=1;
+                    plants.add("Mushroom");
+                }
+                if (repeater.isSelected()){
+                    counter+=1;
+                    plants.add("Repeater");
+                }
+                if(beetroot.isSelected()){
+                    counter+=1;
+                    plants.add("Beetroot");
                 }
 
                 if (counter != 6){
+                    plants.clear();
                     JOptionPane.showMessageDialog(Home, "You have to choose 6 plants", "Error", JOptionPane.ERROR_MESSAGE);
                 }else {
                     clip1.stop();
                     Home.dispose();
                     try {
+                        game_info.setCardNames(plants);
                         Setting_Gui next = new Setting_Gui(game_info);
                     } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ioException) {
                         ioException.printStackTrace();

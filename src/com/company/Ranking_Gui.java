@@ -81,7 +81,7 @@ public class Ranking_Gui {
         ranking.setBackground(new Color(0, 0, 0, 0));
         ranking.setOpaque(false);
         ranking.setForeground(Color.white);
-        ranking.setText("Rank      Username          Score   Win   Lose   Normal   Hard "+"\n"+p.start());
+        ranking.setText("Rank      Username          Score     Win     Lose     Normal      Hard "+"\n"+p.start());
         Home.add(ranking);
         back = new JButton("Main Menu");
         back.setLocation(200,600);

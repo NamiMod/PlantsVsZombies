@@ -22,23 +22,20 @@ public class Zombie extends Character{
     //Enum for defining the states of a zombie
     enum ZombieState {
         WALKING,
-        JUMPING,
-        CHEWING,
-        DESTROYING,
-        SHOOTING
+        CHEWING
     }
     //The state of zombie
     private ZombieState zombieState;
     //The timer for chewing
-    private Timer chewTimer;
+    private transient Timer chewTimer;
     //The chew timer task
-    private TimerTask chewTimerTask ;
+    private transient TimerTask chewTimerTask ;
     //This variable saves if any frozen pea impact to the zombie(to change the speed later)
     private boolean isFrozen;
     //A field for creat unfreeze class(inner class)
     private UnFreeze unfreeze ;
     //the timer of freezing
-    private Timer freezeTimer ;
+    private transient Timer freezeTimer ;
     //This variable tell us for example is the cone head zombie change to normal zombie or not for one time
     private boolean isChanged;
     /**
@@ -202,18 +199,4 @@ public class Zombie extends Character{
         }
     }
 
-    public void roastZombie() {
-    }
-
-    public void checkReachedHouse() {
-
-    }
-
-    public void moveZombie() {
-
-    }
-
-    public void eatPlant() {
-
-    }
 }

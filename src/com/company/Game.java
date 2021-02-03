@@ -1,5 +1,13 @@
 package com.company;
 
+/**
+ * This is Game class.
+ * in this class we create new game and start it
+ *
+ * @version 1.0
+ * @author Mahdi Rahmani & Nami Modarressi
+ */
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +21,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class Game {
     static  GameFrame mainframe ;
     //GameState state;
-    public void start(GameState state){
+    public void start(GameState state , boolean load){
 
         EventQueue.invokeLater(new Runnable() {
             @Override
@@ -27,7 +35,7 @@ public class Game {
 
                 state.setFrame(mainframe);
                 // Create and execute the game-loop
-                GameLoop game = new GameLoop(state);
+                GameLoop game = new GameLoop(state,load);
                 game.init();
                 ThreadPool.execute(game);
                 // and the game starts ...

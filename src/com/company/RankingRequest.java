@@ -24,8 +24,13 @@ public class RankingRequest {
     private BufferedReader read;
     private PrintWriter output;
 
+    /**
+     * send request
+     * @return result
+     * @throws IOException cant read file
+     */
     public String start() throws IOException {
-        socket = new Socket("127.0.0.1", 5060);
+        socket = new Socket("127.0.0.1", 5061);
         output = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
         read = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         try {
@@ -39,6 +44,10 @@ public class RankingRequest {
         }
     }
 
+    /**
+     * @return ranking
+     * @throws IOException cant read file
+     */
     public String getRanking() throws IOException {
         FileHandler p = new FileHandler();
         output.println("2");
@@ -48,6 +57,10 @@ public class RankingRequest {
         return p.openRanking(response);
     }
 
+    /**
+     * close request
+     * @throws IOException
+     */
     public void close() throws IOException {
         socket.close();
         read.close();

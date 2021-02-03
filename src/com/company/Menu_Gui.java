@@ -85,7 +85,7 @@ public class Menu_Gui {
                 Game game = new Game();
                 try {
                     GameState state = new GameState(game_info);
-                    game.start(state);
+                    game.start(state , false);
                 } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ioException) {
                     ioException.printStackTrace();
                 }

@@ -129,6 +129,8 @@ public class Change_Username_password_Gui {
                            Home.dispose();
                            clip1.stop();
                            Login_And_Register_Gui q = new Login_And_Register_Gui();
+                       }else {
+                           JOptionPane.showMessageDialog(Home, "Cant Change username or password", "Error", JOptionPane.ERROR_MESSAGE);
                        }
                    } catch (IOException ioException) {
                        ioException.printStackTrace();

@@ -5,6 +5,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -24,25 +25,28 @@ import java.util.TimerTask;
  *    http://gameprogrammingpatterns.com/game-loop.html
  *
  * @author Seyed Mohammad Ghaffarian
+ * @author Mahdi Rahmani
+ * @author Seyed Nami Modarressi
  */
-public class GameLoop implements Runnable {
+public class GameLoop implements Runnable , Serializable {
 
 
     /**
      * Frame Per Second.
      */
-    private static final int FPS = 60;
+    private static final int FPS = 30;
     //The game frame
     private GameFrame canvas;
     //The game state
     private GameState state;
-
+    private boolean load;
     /**
      * GameLoop constructor
      */
-    GameLoop( GameState state) {
+    GameLoop( GameState state , boolean load) {
         canvas = state.getFrame();
         this.state = state;
+        this.load=load;
     }
 
     /**
@@ -51,7 +55,9 @@ public class GameLoop implements Runnable {
     void init() {
 
         state.setGameController(new GameController(state));
-        state.getGameController().init();
+        if (!load) {
+            state.getGameController().init();
+        }
 
         canvas.addMouseListener(state.getMouseListener());
         canvas.addMouseMotionListener(state.getMouseMotionListener());
@@ -177,7 +183,7 @@ public class GameLoop implements Runnable {
     @Override
     public void run() {
         boolean gameOver = false;
-        while (!gameOver) {
+        while (!gameOver && state.isRun()) {
             try {
                 gameOver = state.getGameOver();
                 long start = System.currentTimeMillis();
@@ -193,43 +199,42 @@ public class GameLoop implements Runnable {
         }
         canvas.dispose();
         state.stop();
-        if(state.getDeadZombies() >= 30)
-        {
-            if (state.getGameSetting().getMode() == 0){
-                try {
-                    Score_Gui next = new Score_Gui(3,state.getGameSetting());
-                    UpdateScoreRequest request = new UpdateScoreRequest();
-                    request.start(state.getGameSetting().getUsername(),0,0);
-                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-                    e.printStackTrace();
+        if (gameOver) {
+            if (state.getDeadZombies() >= 29) {
+                if (state.getGameSetting().getMode() == 0) {
+                    try {
+                        Score_Gui next = new Score_Gui(3, state.getGameSetting());
+                        UpdateScoreRequest request = new UpdateScoreRequest();
+                        request.start(state.getGameSetting().getUsername(), 0, 0);
+                    } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        Score_Gui next = new Score_Gui(10, state.getGameSetting());
+                        UpdateScoreRequest request = new UpdateScoreRequest();
+                        request.start(state.getGameSetting().getUsername(), 1, 0);
+                    } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }else{
-                try {
-                    Score_Gui next = new Score_Gui(10,state.getGameSetting());
-                    UpdateScoreRequest request = new UpdateScoreRequest();
-                    request.start(state.getGameSetting().getUsername(),1,0);
-                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        else
-        {
-            if (state.getGameSetting().getMode() == 0){
-                try {
-                    Score_Gui next = new Score_Gui(-1,state.getGameSetting());
-                    UpdateScoreRequest request = new UpdateScoreRequest();
-                    request.start(state.getGameSetting().getUsername(),0,1);
-                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-                    e.printStackTrace();
-                }
-            }else{
-                try {
-                    Score_Gui next = new Score_Gui(-3,state.getGameSetting());
-                    UpdateScoreRequest request = new UpdateScoreRequest();
-                    request.start(state.getGameSetting().getUsername(),1,1);
-                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-                    e.printStackTrace();
+            } else {
+                if (state.getGameSetting().getMode() == 0) {
+                    try {
+                        Score_Gui next = new Score_Gui(-1, state.getGameSetting());
+                        UpdateScoreRequest request = new UpdateScoreRequest();
+                        request.start(state.getGameSetting().getUsername(), 0, 1);
+                    } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        Score_Gui next = new Score_Gui(-3, state.getGameSetting());
+                        UpdateScoreRequest request = new UpdateScoreRequest();
+                        request.start(state.getGameSetting().getUsername(), 1, 1);
+                    } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }

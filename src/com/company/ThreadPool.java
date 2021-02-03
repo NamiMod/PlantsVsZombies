@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.Serializable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -8,7 +9,7 @@ import java.util.concurrent.Executors;
  *
  * @author Seyed Mohammad Ghaffarian
  */
-public class ThreadPool {
+public class ThreadPool implements Serializable {
 
     private static ExecutorService executor;
 
