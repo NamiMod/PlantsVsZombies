@@ -63,6 +63,8 @@ public class Shooter extends Plant{
                             bullet1 = new Pea(bulletFirstPos, getGameState());
                         }else if (thisShooter instanceof SnowPeaShooter){
                             bullet1 = new FrozenPea(bulletFirstPos, getGameState());
+                        }else if (thisShooter instanceof Beetroot){
+                            bullet1 = new BeetBullet(bulletFirstPos, getGameState());
                         }else if (thisShooter instanceof Repeater) {
                             bullet1 = new Pea(bulletFirstPos, getGameState());
                             int[] secondBulletFirstPos = new int[2];

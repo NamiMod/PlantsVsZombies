@@ -184,11 +184,11 @@ public class GameSetting {
      */
     public void setNormalState()
     {
-        zombieSpeed = new int[]{2, 2, 2};
-        zombieAttackPower = new int[]{5,10,20};
+        zombieSpeed = new int[]{2, 2, 2 , 2};
+        zombieAttackPower = new int[]{5,10,20,15};
         skySunTime = 25000;
         sunFlowerProducingSunTime = 20000;
-        chargingCardTime = new int[]{7500,30000,7500,7500,7500,10000,7500};
+        chargingCardTime = new int[]{7500,30000,7500,7500,7500,10000,7500,7000};
 
     }
 
@@ -198,11 +198,11 @@ public class GameSetting {
      */
     public void setHArdState()
     {
-        zombieSpeed = new int[]{2, 2, 2};
-        zombieAttackPower = new int[]{5,10,20};
+        zombieSpeed = new int[]{2, 3, 3 , 3};
+        zombieAttackPower = new int[]{5,15,25,20};
         skySunTime = 30000;
         sunFlowerProducingSunTime = 25000;
-        chargingCardTime = new int[]{7500,30000,7500,30000,30000,20000,15000};
+        chargingCardTime = new int[]{7500,30000,7500,30000,30000,20000,15000,12000};
     }
 
     /**

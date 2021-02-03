@@ -122,6 +122,13 @@ public class GameController {
             state.addCard("CherryBomb", card);
             index++;
         }
+        if (cardNames.contains("Beetroot"))
+        {
+            Card card = new CherryBombCard(cardsPosition[index], state ,state.getGameSetting().getChargingCardTime()[7]);
+            state.addElement(card);
+            state.addCard("Beetroot", card);
+            index++;
+        }
 
     }
 
@@ -231,7 +238,7 @@ public class GameController {
             case 5:
             {
                 if (state.getDeadZombies() >= 30){
-                    //WINNER
+                    state.setGameOver(true);
                 }
             }
         }
@@ -248,7 +255,7 @@ public class GameController {
         //we dont know which row the zombie is coming inside (it is random)
         int randomY = zombies_Y_Pos[random.nextInt(5)];
         //The type of the coming zombie is also random
-        int randomType = random.nextInt(3);
+        int randomType = random.nextInt(4);
         //we should set the first position of zombie
         int[] zombieFirstPosition = new int[]{1050 , randomY};
 
@@ -263,6 +270,9 @@ public class GameController {
                 break;
             case 2:
                 zombie = new BucketHeadZombie(zombieFirstPosition, state.getGameSetting().getZombieSpeed()[2], state.getGameSetting().getZombieAttackPower()[2], state);
+                break;
+            case 3:
+                zombie = new FootBallPlayerZombie(zombieFirstPosition, state.getGameSetting().getZombieSpeed()[3], state.getGameSetting().getZombieAttackPower()[3], state);
                 break;
         }
         state.addElement(zombie);

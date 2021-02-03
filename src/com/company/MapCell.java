@@ -105,6 +105,8 @@ public class MapCell {
             card = gameState.getCards().get("Mushroom");
         else if(planted instanceof CherryBomb)
             card = gameState.getCards().get("CherryBomb");
+        else if(planted instanceof Beetroot)
+            card = gameState.getCards().get("Beetroot");
         card.setUsed(true);
         card.chargingAutomatically();
     }

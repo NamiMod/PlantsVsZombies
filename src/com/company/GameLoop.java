@@ -190,6 +190,14 @@ public class GameLoop implements Runnable {
             }
         }
         canvas.dispose();
+        if(state.getDeadZombies() >= 30)
+        {
+
+        }
+        else
+        {
+
+        }
     }
 
 }
