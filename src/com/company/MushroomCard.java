@@ -1,5 +1,14 @@
 package com.company;
-
+/**
+ * This is MushroomCard class.its a kind of  cards.
+ * It handles the works related to This type of card
+ * It extends Card class.
+ * If player has 0 sun and the card is selectable can choose this card
+ * by choosing this card player can plant a Mushroom
+ *
+ * @version 1.0
+ * @author Mahdi Rahmani & Nami Modarressi
+ */
 public class MushroomCard extends Card{
     /**
      * This is the constructor of this class
@@ -8,8 +17,8 @@ public class MushroomCard extends Card{
      * @param position    the x&y coordinates
      * @param gameState   the game state
      */
-    public MushroomCard(int[] position, GameState gameState) {
-        super(position, "cards/mushroompicker.png", "cards/mushroom.png", gameState, 0);
+    public MushroomCard(int[] position, GameState gameState, int chargingTime) {
+        super(position, "cards/mushroompicker.png", "cards/mushroom.png", gameState, 0,chargingTime);
     }
 
     /**
@@ -22,8 +31,18 @@ public class MushroomCard extends Card{
         int[] newPosition = new int[2];
         newPosition[0] = 0;
         newPosition[1] = 0;
-        if (getGameState().getMoney() >= getValue())
+        if (getGameState().getMoney() >= getValue()&& !isUsed())
             getGameState().setSelectedPlant(new Mushroom(newPosition, getGameState()));
+    }
+    /**
+     * in this override method we change the element path
+     * the card is inactive before having enough money
+     * after that we should active the card and change the picture
+     */
+    @Override
+    public void update() {
+        super.update();
+        changeCardImage("cards/mushroompicker.png","cards/mushroompickericy.png");
     }
 
 

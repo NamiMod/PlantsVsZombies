@@ -27,11 +27,6 @@ public class Repeater extends Shooter{
      */
     @Override
     public void action() {
-        super.action();
-        /*int[] bulletFirstPos = new int[2];
-        bulletFirstPos[0] = getPosition()[0] + 20;
-        bulletFirstPos[1] = getPosition()[1] + 10;
-        Pea pea = new Pea(bulletFirstPos, getGameState());*/
         throwBullet();
     }
 }

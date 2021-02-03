@@ -16,6 +16,7 @@ public class ConeHeadZombie extends Zombie{
      * @param position    the x&y coordinates
      * @param speed       The speed of zombie
      * @param attackPower The ability of destroying
+     * @param gameState   the state of the game
      */
     public ConeHeadZombie(int[] position, int speed, int attackPower , GameState gameState) {
         super(position, 560, speed, attackPower, "coneheadzombie.gif" , gameState);

@@ -8,8 +8,8 @@ public class PeaShooterCard extends Card{
      * @param position    the x&y coordinates
      * @param gameState   the game state
      */
-    public PeaShooterCard(int[] position, GameState gameState) {
-        super(position, "cards/Icedpeashooter.png", "cards/Peashooter_HD.png", gameState, 100);
+    public PeaShooterCard(int[] position, GameState gameState, int chargingTime) {
+        super(position, "cards/Icedpeashooter.png", "cards/Peashooter_HD.png", gameState, 100,chargingTime);
     }
 
     /**
@@ -22,7 +22,7 @@ public class PeaShooterCard extends Card{
         int[] newPosition = new int[2];
         newPosition[0] = 0;
         newPosition[1] = 0;
-        if (getGameState().getMoney() >= getValue())
+        if (getGameState().getMoney() >= getValue() && !isUsed())
             getGameState().setSelectedPlant(new PeaShooter(newPosition, getGameState()));
     }
 

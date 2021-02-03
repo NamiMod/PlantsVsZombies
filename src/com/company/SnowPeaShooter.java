@@ -26,11 +26,6 @@ public class SnowPeaShooter extends Shooter{
      */
     @Override
     public void action() {
-        super.action();
-        /*int[] bulletFirstPos = new int[2];
-        bulletFirstPos[0] = getPosition()[0] + 20;
-        bulletFirstPos[1] = getPosition()[1] + 10;
-        FrozenPea frozenPea = new FrozenPea(bulletFirstPos, getGameState());*/
         throwBullet();
     }
 }

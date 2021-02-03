@@ -8,8 +8,8 @@ public class SunFlowerCard extends Card{
      * @param position    the x&y coordinates
      * @param gameState   the game state
      */
-    public SunFlowerCard(int[] position, GameState gameState) {
-        super(position, "cards/Icedsunflowerpicker.png", "cards/Sunflower.png", gameState, 50);
+    public SunFlowerCard(int[] position, GameState gameState, int chargingTime) {
+        super(position, "cards/Icedsunflowerpicker.png", "cards/Sunflower.png", gameState, 50,chargingTime);
     }
 
     /**
@@ -22,7 +22,7 @@ public class SunFlowerCard extends Card{
         int[] newPosition = new int[2];
         newPosition[0] = 0;
         newPosition[1] = 0;
-        if (getGameState().getMoney() >= getValue())
+        if (getGameState().getMoney() >= getValue() && !isUsed())
             getGameState().setSelectedPlant(new SunFlower(newPosition,getGameState().getGameSetting().getSunFlowerProducingSunTime() ,getGameState()));
     }
 

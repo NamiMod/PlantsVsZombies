@@ -14,11 +14,16 @@ public class FrozenPea extends Bullet{
      * create a new Element with a given position
      *
      * @param position the x & y coordinates
+     * @param gameState the gameState
      */
     public FrozenPea(int[] position , GameState gameState) {
         super(position, 1 ,"freezepea.png",35 , gameState);
     }
 
+    /**
+     * This method overrides the update method in superclass
+     * it updates this object
+     */
     @Override
     public void update() {
         super.update();

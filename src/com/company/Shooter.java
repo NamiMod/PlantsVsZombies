@@ -1,5 +1,9 @@
 package com.company;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.TimerTask;
@@ -45,6 +49,7 @@ public class Shooter extends Plant{
                 while (key.hasNext()) {
                     Integer thisKey = key.next();
                     if (getPosition()[1] + 5 == myElement.get(thisKey).getPosition()[1] && myElement.get(thisKey) instanceof Zombie){
+                        playSound();
                         int[] bulletFirstPos = new int[2];
                         bulletFirstPos[0] = getPosition()[0] + 30;
                         bulletFirstPos[1] = getPosition()[1] + 10;
@@ -74,21 +79,20 @@ public class Shooter extends Plant{
             }
         };
         getTimer().schedule(Task, 200, 2000);
-        /*getTimer().schedule(Task, 200, 2000);
-        TimerTask Task = new TimerTask() {
-            @Override
-            public void run()
-            {
-                for (Elements elements : getGameState().getElements())
-                {
-                    if (getPosition()[1] + 5 == elements.getPosition()[1] && elements instanceof Zombie) {
-                        getGameState().addElement(bullet);
-                    }
-                }
-
-            }
-        };
-        getTimer().schedule(Task, 200, 2000);*/
+    }
+    /**
+     * shooting sound !!!
+     */
+    public void playSound() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./PVS Design Kit/sounds/shoot.wav").getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch(Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
     }
 
 }

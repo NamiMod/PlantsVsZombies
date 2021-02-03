@@ -1,5 +1,14 @@
 package com.company;
-
+/**
+ * This is CherryBombCard class.its a kind of  cards.
+ * It handles the works related to This type of card
+ * It extends Card class.
+ * If player has 150 sun and the card is selectable can choose this card
+ * by choosing this card player can plant a cherry bomb
+ *
+ * @version 1.0
+ * @author Mahdi Rahmani & Nami Modarressi
+ */
 public class CherryBombCard extends Card{
     /**
      * This is the constructor of this class
@@ -8,8 +17,8 @@ public class CherryBombCard extends Card{
      * @param position    the x&y coordinates
      * @param gameState   the game state
      */
-    public CherryBombCard(int[] position, GameState gameState) {
-        super(position, "cards/CherryBombPicker.png", "cards/CherryBomb.png", gameState, 150);
+    public CherryBombCard(int[] position, GameState gameState ,int chargingTime) {
+        super(position, "cards/IcedCherryBombPicker.png", "cards/CherryBomb.png", gameState, 150,chargingTime);
     }
 
     /**
@@ -22,7 +31,7 @@ public class CherryBombCard extends Card{
         int[] newPosition = new int[2];
         newPosition[0] = 0;
         newPosition[1] = 0;
-        if (getGameState().getMoney() >= getValue())
+        if (getGameState().getMoney() >= getValue() && !isUsed())
             getGameState().setSelectedPlant(new CherryBomb(newPosition, getGameState()));
     }
 
@@ -34,6 +43,6 @@ public class CherryBombCard extends Card{
     @Override
     public void update() {
         super.update();
-        changeCardImage("cards/CherryBombPicker.png","cards/CherryBombPicker.png");
+        changeCardImage("cards/CherryBombPicker.png","cards/IcedCherryBombPicker.png");
     }
 }

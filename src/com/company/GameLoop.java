@@ -1,12 +1,12 @@
 package com.company;
-/*** In The Name of Allah ***/
 
-import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+
+/*** In The Name of Allah ***/
 
 /**
  * A very simple structure for the main game loop.
@@ -28,7 +28,7 @@ public class GameLoop implements Runnable {
     /**
      * Frame Per Second.
      */
-    private static final int FPS = 30;
+    private static final int FPS = 60;
     //The game frame
     private GameFrame canvas;
     //The game state
@@ -189,6 +189,7 @@ public class GameLoop implements Runnable {
             } catch (InterruptedException ignored) {
             }
         }
+        canvas.dispose();
     }
 
 }

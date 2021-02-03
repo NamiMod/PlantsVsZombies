@@ -16,7 +16,7 @@ public class Main {
     static  GameFrame mainframe ;
     GameState state;
     public static void main(String[] args) {
-	// write your code here
+        // write your code here
 
         EventQueue.invokeLater(new Runnable() {
             @Override

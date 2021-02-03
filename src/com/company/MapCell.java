@@ -3,17 +3,25 @@ package com.company;
 import java.awt.*;
 
 /**
- * a class which shows that what part of the ground is occupied by zombies or plants
+ * This is MapCell class
+ * in this class we hold the information related to cells of map
+ * in this cells we plant the flowers
+ *
+ * @author Mahdi Rhamani & Nami Modarressi
+ * @version 1.0
  */
 public class MapCell {
+
     //The position of each cell in this map
     private int[] position;
+
     //The game sate
     private GameState gameState;
+
     //The plant that we have in this cell
     private Plant plantOfThisCell;
 
-    private boolean plantable = false;
+    //The pointing to our cards
     private boolean isPointing;
 
     /**
@@ -26,8 +34,7 @@ public class MapCell {
         this.gameState = gameState;
         this.position = position;
         plantOfThisCell = null;
-        //new Mushroom(position, gameState)
-        //new SunFlower(position,7000, gameState);
+
     }
 
     /**
@@ -68,6 +75,7 @@ public class MapCell {
             plantOfThisCell = gameState.getSelectedPlant();
             plantOfThisCell.setPosition(position);// the first position that assigns to this plant is(0 ,0)
             plantOfThisCell.action();//after we plant a plant we should call the action of that to start to work
+            setUseOFPlantedCard(plantOfThisCell);
             gameState.setMoney(gameState.getMoney() - gameState.getSelectedPlant().getCost());
             gameState.setSelectedPlant(null);
             gameState.setCursor(null);
@@ -76,6 +84,30 @@ public class MapCell {
         return false;
     }
 
+    /**
+     * this method control the charging and unCharging of cards
+     * @param planted the planted flower
+     */
+    public void setUseOFPlantedCard(Plant planted)
+    {
+        Card card = null;
+        if (planted instanceof SunFlower)
+            card = gameState.getCards().get("SunFlower");
+        else if(planted instanceof PeaShooter)
+            card = gameState.getCards().get("PeaShooter");
+        else if(planted instanceof WallNut)
+            card = gameState.getCards().get("WallNut");
+        else if(planted instanceof Repeater)
+            card = gameState.getCards().get("Repeater");
+        else if(planted instanceof SnowPeaShooter)
+            card = gameState.getCards().get("SnowPeaShooter");
+        else if(planted instanceof Mushroom)
+            card = gameState.getCards().get("Mushroom");
+        else if(planted instanceof CherryBomb)
+            card = gameState.getCards().get("CherryBomb");
+        card.setUsed(true);
+        card.chargingAutomatically();
+    }
     /**
      * draw the object graphically
      * @param g2d the Graphics2D variable
@@ -109,17 +141,11 @@ public class MapCell {
             plantOfThisCell = null;
         }
     }
-    void setPlantable() {
-        plantable = true;
-    }
-    void setUnPlantable() {
-        plantable = false;
-    }
 
-    boolean isPlantable() {
-        return plantable;
-    }
-
+    /**
+     * set the pointing value
+     * @param pointing
+     */
     void setPointing(boolean pointing) {
         this.isPointing = pointing;
     }

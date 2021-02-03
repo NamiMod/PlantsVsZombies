@@ -14,9 +14,10 @@ public class CherryBomb extends Bomb{
      * Creat a new Plant with a given position
      *
      * @param position    the x & y coordinates
+     * @param gameState   the state of game
      */
     public CherryBomb(int[] position ,GameState gameState) {
-        super(position, 150, 70, "./gifs/newCherryBomb.gif",gameState);
+        super(position, 150, 70, "newCherryBomb.gif",gameState);
     }
 
     /**
@@ -26,7 +27,6 @@ public class CherryBomb extends Bomb{
      */
     @Override
     public void action() {
-        super.action();
         blasting(100);
     }
 }

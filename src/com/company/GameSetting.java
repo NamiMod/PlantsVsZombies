@@ -1,4 +1,7 @@
 package com.company;
+
+import java.util.ArrayList;
+
 /**
  *  -- Game Settings--
  *
@@ -26,10 +29,24 @@ public class GameSetting {
 
     // ToDo : change the values of parameters of game related to Normal or Hard mode
 
+    //The zombie speeds (1:normal zombie; 2:conHead zombie; 3:bucketHead zombie)
     private int[] zombieSpeed;
+
+    //The zombie attack powers (1:normal zombie; 2:conHead zombie; 3:bucketHead zombie)
     private int[] zombieAttackPower;
+
+    //the time for producing sun in the sky
     private int skySunTime;
+
+    //the time for producing sun with sun flower
     private int sunFlowerProducingSunTime;
+
+    //the time for charging a card again(1:sunFlower ; 2:WallNut ; 3:PeaShooter ; 4:SnowPeaShooter ; 5:Repeater ; 6:Mushroom ; 7:CherryBomb)
+    private int[] chargingCardTime;
+
+    //the list of cards that user choose
+    private ArrayList<String> cardNames;
+
     /**
      *
      * create new information
@@ -45,7 +62,9 @@ public class GameSetting {
 
         zombieSpeed = new int[3];
         zombieAttackPower = new int[3];
+        cardNames = new ArrayList<>();
         setNormalState();
+        setCardNames(null);
     }
 
     /**
@@ -132,6 +151,35 @@ public class GameSetting {
     }
 
     /**
+     * get the time for charging a card
+     * @return chargingCardTime
+     */
+    public int[] getChargingCardTime() {
+        return chargingCardTime;
+    }
+
+    public ArrayList<String> getCardNames() {
+        return cardNames;
+    }
+
+    public void setCardNames(ArrayList<String> cardNames) {
+        ArrayList<String> defaultCard = new ArrayList<>();
+        this.cardNames.clear();
+        if(cardNames == null)
+        {
+            defaultCard.add("SunFlower");
+            defaultCard.add("WallNut");
+            defaultCard.add("PeaShooter");
+            defaultCard.add("SnowPeaShooter");
+            defaultCard.add("Mushroom");
+            defaultCard.add("CherryBomb");
+            this.cardNames = defaultCard;
+        }
+        else
+            this.cardNames = cardNames;
+    }
+
+    /**
      * set the normal state
      */
     public void setNormalState()
@@ -140,6 +188,8 @@ public class GameSetting {
         zombieAttackPower = new int[]{5,10,20};
         skySunTime = 25000;
         sunFlowerProducingSunTime = 20000;
+        chargingCardTime = new int[]{7500,30000,7500,7500,7500,10000,7500};
+
     }
 
     // ToDo : must be edited
@@ -150,8 +200,9 @@ public class GameSetting {
     {
         zombieSpeed = new int[]{2, 2, 2};
         zombieAttackPower = new int[]{5,10,20};
-        skySunTime = 25000;
-        sunFlowerProducingSunTime = 20000;
+        skySunTime = 30000;
+        sunFlowerProducingSunTime = 25000;
+        chargingCardTime = new int[]{7500,30000,7500,30000,30000,20000,15000};
     }
 
     /**

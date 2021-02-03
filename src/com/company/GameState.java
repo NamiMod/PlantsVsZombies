@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.awt.Cursor;
+import java.util.HashMap;
 import java.util.Iterator;
 
 /**
@@ -57,19 +58,26 @@ public class GameState {
 
     //The message address
     private String messageAddress;
+
     //the controller of game
     private GameController gameController;
+
     //private CardsPicker pointedPicker;
     private boolean pointingToPicker ;
+
     //The boolean variable to show if the shovel is chosen or not
     private boolean isShovelSelected ;
+
     //The number of dead zombies
     private int deadZombies;
+
     //The score of player
     private int score;
+
     //the game setting
     private GameSetting gameSetting;
 
+    private HashMap<String,Card> cards;
     /**
      * set first value of parameters
      */
@@ -85,6 +93,7 @@ public class GameState {
         isShovelSelected = false;
         score = 0;
         gameSetting = new GameSetting();
+        cards = new HashMap<>();
     }
 
     /**
@@ -247,6 +256,24 @@ public class GameState {
      */
     public void setGameController(GameController gameController) {
         this.gameController = gameController;
+    }
+
+    /**
+     * put a new card to the list of cards
+     * @param name name of card
+     * @param card the card object
+     */
+    public void addCard(String name , Card card)
+    {
+        cards.put(name, card);
+    }
+
+    /**
+     * get the cards of this game
+     * @return
+     */
+    public HashMap<String, Card> getCards() {
+        return cards;
     }
 
     /**

@@ -8,8 +8,8 @@ public class RepeaterCard extends Card{
      * @param position    the x&y coordinates
      * @param gameState   the game state
      */
-    public RepeaterCard(int[] position, GameState gameState) {
-        super(position, "elementPath", "cursorImageAddress", gameState, 150);
+    public RepeaterCard(int[] position, GameState gameState, int chargingTime) {
+        super(position, "cards/repeaterCard.jpg", "repeaterCursor.png", gameState, 150,chargingTime);
     }
 
     /**
@@ -22,7 +22,18 @@ public class RepeaterCard extends Card{
         int[] newPosition = new int[2];
         newPosition[0] = 0;
         newPosition[1] = 0;
-        if (getGameState().getMoney() >= getValue())
+        if (getGameState().getMoney() >= getValue() && !isUsed())
             getGameState().setSelectedPlant(new Repeater(newPosition, getGameState()));
+    }
+
+    /**
+     * in this override method we change the element path
+     * the card is inactive before having enough money
+     * after that we should active the card and change the picture
+     */
+    @Override
+    public void update() {
+        super.update();
+        changeCardImage("cards/repeaterCard.jpg","cards/icedrepeaterCard.jpg");
     }
 }

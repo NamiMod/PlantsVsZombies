@@ -1,11 +1,16 @@
 package com.company;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
+
 /**
  * This is Lawn Mower class
  * in this class we hold the information related to Lawn mower
  * when the zombies arrive to home for the first time the lawn mover kills them
  *
- * @author Mahdi Rhamani
+ * @author Mahdi Rhamani & Nami Modarressi
  * @version 1.0
  */
 public class LawnMower extends Character{
@@ -32,8 +37,23 @@ public class LawnMower extends Character{
         super.update();
         Zombie collidedZombie = getDestroyedZombie();
         if (collidedZombie != null ){
+            playSound();
             collidedZombie.hurt(collidedZombie.getHp());
             setSpeed(-5);
+        }
+    }
+    /**
+     * Sound for lamborghini !!!
+     */
+    public void playSound() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./PVS Design Kit/sounds/lamborghini.wav").getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch(Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
         }
     }
 }

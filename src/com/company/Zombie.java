@@ -1,6 +1,10 @@
 package com.company;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.awt.*;
+import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -128,6 +132,7 @@ public class Zombie extends Character{
             // Chewing
             Plant coincidence = getCollidedPlant();
             if (coincidence == null) {
+                playSound();
                 zombieState = ZombieState.WALKING;
                 chewTimerTask.cancel();
                 chewTimerTask = null;
@@ -178,6 +183,21 @@ public class Zombie extends Character{
             unfreeze.cancel();
         getGameState().setDeadZombies(getGameState().getDeadZombies() + 1);
         System.out.println(getGameState().getDeadZombies());
+    }
+
+    /**
+     * Sound for eating plants !!!
+     */
+    public void playSound() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("./PVS Design Kit/sounds/chomp.wav").getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch(Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
     }
 
     public void roastZombie() {

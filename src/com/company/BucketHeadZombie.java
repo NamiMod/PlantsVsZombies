@@ -16,6 +16,7 @@ public class BucketHeadZombie extends Zombie{
      * @param position    the x&y coordinates
      * @param speed       The speed of zombie
      * @param attackPower The ability of destroying
+     * @param gameState   the state of the game
      */
     public BucketHeadZombie(int[] position, int speed, int attackPower , GameState gameState) {
         super(position, 1300, speed, attackPower, "bucketheadzombie.gif" , gameState);
