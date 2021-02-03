@@ -431,7 +431,7 @@ public class FileHandler {
      */
     public void save(String name , GameState state){
 
-        try (FileOutputStream fs = new FileOutputStream(name + ".PVZ")){
+        try (FileOutputStream fs = new FileOutputStream("saves"+name + ".PVZ")){
             ObjectOutputStream  os = new ObjectOutputStream(fs);
             os.writeObject(state);
 
@@ -445,7 +445,7 @@ public class FileHandler {
      * @param file name of save
      */
     public GameState load(File file){
-        GameState result = new GameState();
+        //GameState result = new GameState();
         try (FileInputStream fs = new FileInputStream(file)){
             ObjectInputStream os = new ObjectInputStream(fs);
 

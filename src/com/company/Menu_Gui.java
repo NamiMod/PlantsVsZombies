@@ -44,11 +44,6 @@ public class Menu_Gui {
     private Line line1 = AudioSystem.getLine(info);
 
 
-    private AudioInputStream as2= AudioSystem.getAudioInputStream(new File("./PVS Design Kit/sounds/background.wav"));
-    private AudioFormat af2 = as2.getFormat();
-    private Clip clip2 = AudioSystem.getClip();
-    private DataLine.Info info2 = new DataLine.Info(Clip.class, af2);
-    private Line line2 = AudioSystem.getLine(info2);
 
     /**
      * create new Menu window
@@ -87,15 +82,13 @@ public class Menu_Gui {
             public void actionPerformed(ActionEvent e) {
                 Home.dispose();
                 clip1.stop();
-                if (game_info.getSound() == 0){
-                    try {
-                        playSoundGame();
-                    } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ioException) {
-                        ioException.printStackTrace();
-                    }
-                }
                 Game game = new Game();
-                game.start();
+                try {
+                    GameState state = new GameState(game_info);
+                    game.start(state);
+                } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ioException) {
+                    ioException.printStackTrace();
+                }
             }
         });
         Home.add(new_game);
@@ -193,23 +186,6 @@ public class Menu_Gui {
             clip1.open(as1);
             clip1.loop(Clip.LOOP_CONTINUOUSLY);
             clip1.start();
-        }
-
-    }
-
-    /**
-     * play music
-     * @throws IOException cant open music
-     * @throws UnsupportedAudioFileException music file is not in good format
-     * @throws LineUnavailableException cant track data of file
-     */
-    public void playSoundGame() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
-
-        if ( ! line2.isOpen() )
-        {
-            clip2.open(as2);
-            clip2.loop(Clip.LOOP_CONTINUOUSLY);
-            clip2.start();
         }
 
     }

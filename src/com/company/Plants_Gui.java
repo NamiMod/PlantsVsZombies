@@ -48,6 +48,9 @@ public class Plants_Gui {
     private JLabel mushRoom;
     private JCheckBox mushroom;
 
+    // repeater
+    // beet
+
     private GameSetting game_info;
 
     private AudioInputStream as1 = AudioSystem.getAudioInputStream(new File("./PVS Design Kit/sounds/menu.wav"));

@@ -1,11 +1,12 @@
 package com.company;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * a class which shows that what part of the ground is occupied by zombies or plants
  */
-public class MapCell {
+public class MapCell implements Serializable {
     //The position of each cell in this map
     private int[] position;
     //The game sate

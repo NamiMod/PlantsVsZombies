@@ -18,7 +18,9 @@ public class Main {
 
         public static void main(String[] args) throws IOException, InterruptedException, LineUnavailableException, UnsupportedAudioFileException {
 
-            Plants_Gui p = new Plants_Gui(new GameSetting());
+            //Plants_Gui p = new Plants_Gui(new GameSetting());
+            //Click_To_Start_GUI p = new Click_To_Start_GUI();
+            Menu_Gui p = new Menu_Gui(new GameSetting());
 
 
         }

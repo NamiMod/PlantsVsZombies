@@ -41,6 +41,8 @@ public class Zombie extends Character{
     private Timer freezeTimer ;
     //This variable tell us for example is the cone head zombie change to normal zombie or not for one time
     private boolean isChanged;
+
+    private GameState state;
     /**
      * This is constructor of this class
      * It calls the constructor of superclass and pass the needed argument as an entry
@@ -62,6 +64,7 @@ public class Zombie extends Character{
         unfreeze = null;
         freezeTimer = new Timer();
         isChanged = false;
+        state=gameState;
     }
 
     /**
@@ -132,7 +135,9 @@ public class Zombie extends Character{
             // Chewing
             Plant coincidence = getCollidedPlant();
             if (coincidence == null) {
-                playSound();
+                if (state.getGameSetting().getSound() == 0) {
+                    playSound();
+                }
                 zombieState = ZombieState.WALKING;
                 chewTimerTask.cancel();
                 chewTimerTask = null;

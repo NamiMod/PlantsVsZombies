@@ -4,6 +4,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.File;
+import java.io.Serializable;
 
 /**
  * This is Lawn Mower class
@@ -13,7 +14,9 @@ import java.io.File;
  * @author Mahdi Rhamani
  * @version 1.0
  */
-public class LawnMower extends Character{
+public class LawnMower extends Character implements Serializable {
+
+    private GameState state;
     /**
      * This is constructor of this class
      * It calls the constructor of superclass and pass the needed argument as an entry
@@ -25,6 +28,7 @@ public class LawnMower extends Character{
      */
     public LawnMower(int[] position, GameState gameState) {
         super(position, 100, "Lawn_Mower.png", gameState, 65, 80 , 0);
+        state=gameState;
     }
 
     /**
@@ -37,7 +41,9 @@ public class LawnMower extends Character{
         super.update();
         Zombie collidedZombie = getDestroyedZombie();
         if (collidedZombie != null ){
-            playSound();
+            if (state.getGameSetting().getSound() == 0) {
+                playSound();
+            }
             collidedZombie.hurt(collidedZombie.getHp());
             setSpeed(-5);
         }

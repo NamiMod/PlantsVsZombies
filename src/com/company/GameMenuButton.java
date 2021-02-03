@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class GameMenuButton extends Elements {
 
-    private GameSetting state;
+    private GameState state;
     private GameFrame game;
 
     /**
@@ -20,7 +20,7 @@ public class GameMenuButton extends Elements {
      */
     GameMenuButton(int[] pos, int width, int height, GameState gameState) {
         super(pos, "menu.jpg", gameState , width, height);
-        this.state=gameState.getGameSetting();
+        this.state=gameState;
     }
 
     /**

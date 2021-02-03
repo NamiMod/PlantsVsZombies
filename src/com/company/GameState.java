@@ -1,9 +1,12 @@
 /*** In The Name of Allah ***/
 
 package com.company;
+import javax.sound.sampled.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.awt.Cursor;
@@ -70,11 +73,13 @@ public class GameState implements Serializable {
     private int score;
     //the game setting
     private GameSetting gameSetting;
+    private GameFrame frame;
+    private int sound = 0;
 
     /**
      * set first value of parameters
      */
-    public GameState() {
+    public GameState(GameSetting gameSetting) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         elements = new ArrayList<Elements>();
         mapCells = new ArrayList<MapCell>();
         money = 0;
@@ -85,7 +90,19 @@ public class GameState implements Serializable {
         pointingToPicker = true;
         isShovelSelected = false;
         score = 0;
-        gameSetting = new GameSetting();
+        this.gameSetting=gameSetting;
+        if (gameSetting.getSound() == 0){
+            playSoundGame();
+        }
+    }
+
+
+    public GameFrame getFrame() {
+        return frame;
+    }
+
+    public void setFrame(GameFrame frame) {
+        this.frame = frame;
     }
 
     /**
@@ -367,6 +384,32 @@ public class GameState implements Serializable {
         public void mouseMoved(MouseEvent e) {
         }
 
+    }
+    /**
+     * play music
+     * @throws IOException cant open music
+     * @throws UnsupportedAudioFileException music file is not in good format
+     * @throws LineUnavailableException cant track data of file
+     */
+    public void playSoundGame() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+
+        AudioInputStream as2= AudioSystem.getAudioInputStream(new File("./PVS Design Kit/sounds/background.wav"));
+        AudioFormat af2 = as2.getFormat();
+        Clip clip2 = AudioSystem.getClip();
+        DataLine.Info info2 = new DataLine.Info(Clip.class, af2);
+        Line line2 = AudioSystem.getLine(info2);
+
+        if ( ! line2.isOpen() )
+        {
+            clip2.open(as2);
+            clip2.loop(Clip.LOOP_CONTINUOUSLY);
+            clip2.start();
+        }
+
+    }
+
+    public void stop(){
+       // clip2.stop();
     }
 
 }

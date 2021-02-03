@@ -21,6 +21,7 @@ public class Bomb extends Plant{
      * @param cost        the cost of this plant
      * @param HP          The health point
      * @param elementPath the path of element gif or image
+     * @param gameState   the state of the game
      */
     public Bomb(int[] position, int cost, int HP, String elementPath ,GameState gameState) {
         super(position, cost, HP, elementPath , gameState);
@@ -53,7 +54,6 @@ public class Bomb extends Plant{
             }
 
         };
-
         getTimer().schedule(Task, 2000);
     }
 }

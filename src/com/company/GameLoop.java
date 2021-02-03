@@ -36,11 +36,11 @@ public class GameLoop implements Runnable {
 
     /**
      * GameLoop constructor
-     * @param frame
      */
-    GameLoop(GameFrame frame) {
-        canvas = frame;
-        state = new GameState();
+    GameLoop( GameState state) {
+        canvas = state.getFrame();
+        this.state = state;
+
     }
 
     /**

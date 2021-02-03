@@ -17,6 +17,8 @@ import java.util.TimerTask;
  * @author Mahdi Rahmani & Nami Modarressi
  */
 public class Shooter extends Plant{
+
+    private GameState state ;
     /**
      * This is the constructor of this class.
      * Creat a new Plant with a given position , cost , HP , elementPath
@@ -27,6 +29,7 @@ public class Shooter extends Plant{
      */
     public Shooter(int[] position , int cost, int HP, String elementPath, GameState gameState) {
         super(position , cost, HP , elementPath,gameState);
+        this.state=gameState;
     }
 
     /**
@@ -49,7 +52,9 @@ public class Shooter extends Plant{
                 while (key.hasNext()) {
                     Integer thisKey = key.next();
                     if (getPosition()[1] + 5 == myElement.get(thisKey).getPosition()[1] && myElement.get(thisKey) instanceof Zombie){
-                        playSound();
+                        if (state.getGameSetting().getSound() == 0) {
+                            playSound();
+                        }
                         int[] bulletFirstPos = new int[2];
                         bulletFirstPos[0] = getPosition()[0] + 30;
                         bulletFirstPos[1] = getPosition()[1] + 10;

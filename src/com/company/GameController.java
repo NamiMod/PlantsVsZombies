@@ -98,7 +98,9 @@ public class GameController {
             break;
             case 2:
             {
-                playSound();
+                if (state.getGameSetting().getSound() == 0) {
+                    playSound();
+                }
                 step = 0;
                 final int[] zombieNumber1 = {0};
                 Timer secondStepTimer = new Timer();
@@ -122,7 +124,9 @@ public class GameController {
             break;
             case 3:
             {
-                playSound();
+                if (state.getGameSetting().getSound() == 0) {
+                    playSound();
+                }
                 step = 0;
                 final int[] zombieNumber2 = {0};
                 Timer thirdStepTimer = new Timer();
@@ -148,7 +152,9 @@ public class GameController {
             break;
             case 4:
             {
-                playSound();
+                if (state.getGameSetting().getSound() == 0) {
+                    playSound();
+                }
                 step = 0;
                 final int[] zombieNumber3 = {0};
                 Timer forthStepTimer = new Timer();

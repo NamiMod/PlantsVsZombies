@@ -17,13 +17,13 @@ package com.company;
  * selecting menu in the middle of the game
  */
 public class GameMenu  {
-     GameSetting state;
+     GameState state;
      JFrame frame ;
     /**
      * select menu constructor
      */
 
-    public GameMenu(GameSetting state) {
+    public GameMenu(GameState state) {
         this.state=state;
         EventQueue.invokeLater(new Runnable() {
             @Override
@@ -102,15 +102,24 @@ public class GameMenu  {
                     if (exitButton.contains(e.getPoint())) {
                         try {
                             frame.dispose();
-                            System.exit(1);
-                            Menu_Gui q = new Menu_Gui(state);
+                            state.getFrame().dispose();
+                            state.stop();
+                            Menu_Gui q = new Menu_Gui(state.getGameSetting());
                         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException unsupportedAudioFileException) {
                             unsupportedAudioFileException.printStackTrace();
                         }
                     }
-                    if (continueButton.contains(e.getPoint())) {//TODO : select the level and start from that
-
-                        // Todo : save method
+                    if (continueButton.contains(e.getPoint())) {
+                        FileHandler file = new FileHandler();
+                        try {
+                            frame.dispose();
+                            state.getFrame().dispose();
+                            state.stop();
+                            Menu_Gui q = new Menu_Gui(state.getGameSetting());
+                            file.save("salam",state);
+                        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException unsupportedAudioFileException) {
+                            unsupportedAudioFileException.printStackTrace();
+                        }
 
                     }
                     if (return2MenuButton.contains(e.getPoint())) {

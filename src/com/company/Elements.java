@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * This is element class. the character class extends from this class
@@ -12,7 +13,7 @@ import java.io.IOException;
  * @version 1.0
  * @author Mahdi Rahmani  & Nami Modarresi
  */
-public class Elements {
+public class Elements implements Serializable {
     //The position field
     private int [] position;
     //The path of gif or image

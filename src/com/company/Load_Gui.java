@@ -142,11 +142,9 @@ public class Load_Gui {
             public void actionPerformed(ActionEvent e) {
                 Home.dispose();
                 clip1.stop();
-                try {
-                    Menu_Gui next = new Menu_Gui(game_info);
-                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException unsupportedAudioFileException) {
-                    unsupportedAudioFileException.printStackTrace();
-                }
+                FileHandler p = new FileHandler();
+                Game game = new Game();
+                game.start(p.load(new File("salam.PVZ")));
             }
         });
         Home.add(menu);

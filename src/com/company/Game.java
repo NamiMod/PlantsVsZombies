@@ -12,8 +12,8 @@ import java.util.HashMap;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class Game {
     static  GameFrame mainframe ;
-    GameState state;
-    public void start(){
+    //GameState state;
+    public void start(GameState state){
 
         EventQueue.invokeLater(new Runnable() {
             @Override
@@ -25,8 +25,9 @@ public class Game {
                 mainframe.setVisible(true);
                 mainframe.initBufferStrategy();
 
+                state.setFrame(mainframe);
                 // Create and execute the game-loop
-                GameLoop game = new GameLoop(mainframe);
+                GameLoop game = new GameLoop(state);
                 game.init();
                 ThreadPool.execute(game);
                 // and the game starts ...
