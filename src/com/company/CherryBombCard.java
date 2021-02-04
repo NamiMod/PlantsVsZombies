@@ -20,7 +20,6 @@ public class CherryBombCard extends Card{
     public CherryBombCard(int[] position, GameState gameState ,int chargingTime) {
         super(position, "cards/IcedCherryBombPicker.png", "cards/CherryBomb.png", gameState, 150,chargingTime);
     }
-
     /**
      * If you click on this kind of card we should this action
      * This method overrides the click action in character class

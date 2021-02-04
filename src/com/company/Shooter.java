@@ -49,7 +49,9 @@ public class Shooter extends Plant{
                 while (key.hasNext()) {
                     Integer thisKey = key.next();
                     if (getPosition()[1] + 5 == myElement.get(thisKey).getPosition()[1] && myElement.get(thisKey) instanceof Zombie){
-                        playSound();
+                        if (getGameState().getGameSetting().getSound() == 0) {
+                            playSound();
+                        }
                         int[] bulletFirstPos = new int[2];
                         bulletFirstPos[0] = getPosition()[0] + 30;
                         bulletFirstPos[1] = getPosition()[1] + 10;

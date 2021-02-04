@@ -1,12 +1,20 @@
 package com.company;
-
+/**
+ * This is Game Controller class.
+ *
+ * in this class we initialize elements
+ *
+ * @version 1.0
+ * @author Mahdi Rahmani & Nami Modarressi
+ */
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.File;
+import java.io.Serializable;
 import java.util.*;
 
-public class GameController {
+public class GameController implements Serializable {
     //The y coordinates that zombies can entre from
     private int[] zombies_Y_Pos;
     //The game state
@@ -20,7 +28,7 @@ public class GameController {
      * level constructor
      * @param state the state og game
      */
-    public GameController(GameState state) {
+    public GameController(GameState state)  {
         this.state = state;
         zombies_Y_Pos = new int[]{80, 175, 270, 365, 460};
         cardsPosition = new int[][]{{70,10 },{123,10},{176,10},{229,10},{282,10},{335,10}};
@@ -45,22 +53,15 @@ public class GameController {
         state.addElement(new LawnMower(forthLawnMowerFirstPos, state));
         state.addElement(new LawnMower(fifthLawnMowerFirstPos, state));
 
-
-        //adding the flowers
-        /*
-        int[] sunFlowerCardFirstPos = new int[]{70,10};
-        int[] peaShooterCardFirstPos = new int[]{123,10};
-        int[] snowPeaShooterCardFirstPos = new int[]{176,10};
-        int[] mushroomCardFirstPos = new int[]{229,10};
-        int[] wallNutCardsFirstPos = new int[]{282,10};
-        int[] cherryBombCardsFirstPos = new int[]{335,10};
-        */
         setGameCards(state.getGameSetting().getCardNames());
 
         //adding shovel
         int[] shovelFirstPos = new int[]{120,500};
         state.addElement(new Shovel(shovelFirstPos, state));
 
+        //adding menu button
+        int[] menuPos = new int[]{10,530};
+        state.addElement(new GameMenuButton(menuPos,100,30,state));
     }
 
     /**
@@ -124,7 +125,7 @@ public class GameController {
         }
         if (cardNames.contains("Beetroot"))
         {
-            Card card = new CherryBombCard(cardsPosition[index], state ,state.getGameSetting().getChargingCardTime()[7]);
+            Card card = new BeetrootCard(cardsPosition[index], state ,state.getGameSetting().getChargingCardTime()[7]);
             state.addElement(card);
             state.addCard("Beetroot", card);
             index++;
@@ -161,7 +162,9 @@ public class GameController {
             break;
             case 2:
             {
-                playSound();
+                if (state.getGameSetting().getSound() == 0) {
+                    playSound();
+                }
                 step = 0;
                 final int[] zombieNumber1 = {0};
                 Timer secondStepTimer = new Timer();
@@ -185,7 +188,9 @@ public class GameController {
             break;
             case 3:
             {
-                playSound();
+                if (state.getGameSetting().getSound() == 0) {
+                    playSound();
+                }
                 step = 0;
                 final int[] zombieNumber2 = {0};
                 Timer thirdStepTimer = new Timer();
@@ -211,7 +216,9 @@ public class GameController {
             break;
             case 4:
             {
-                playSound();
+                if (state.getGameSetting().getSound() == 0) {
+                    playSound();
+                }
                 step = 0;
                 final int[] zombieNumber3 = {0};
                 Timer forthStepTimer = new Timer();
@@ -237,7 +244,7 @@ public class GameController {
             break;
             case 5:
             {
-                if (state.getDeadZombies() >= 30){
+                if (state.getDeadZombies() >= 29){
                     state.setGameOver(true);
                 }
             }

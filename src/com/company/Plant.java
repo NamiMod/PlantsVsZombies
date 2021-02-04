@@ -14,7 +14,7 @@ public class Plant extends Character{
     // The cost(number of needed sun)
     private int cost;
     //The timer for action
-    private Timer timer ;
+    private transient Timer timer ;
 
     /**
      * This is the constructor of this class.

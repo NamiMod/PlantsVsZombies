@@ -22,23 +22,20 @@ public class Zombie extends Character{
     //Enum for defining the states of a zombie
     enum ZombieState {
         WALKING,
-        JUMPING,
-        CHEWING,
-        DESTROYING,
-        SHOOTING
+        CHEWING
     }
     //The state of zombie
     private ZombieState zombieState;
     //The timer for chewing
-    private Timer chewTimer;
+    private transient Timer chewTimer;
     //The chew timer task
-    private TimerTask chewTimerTask ;
+    private transient TimerTask chewTimerTask ;
     //This variable saves if any frozen pea impact to the zombie(to change the speed later)
     private boolean isFrozen;
     //A field for creat unfreeze class(inner class)
     private UnFreeze unfreeze ;
     //the timer of freezing
-    private Timer freezeTimer ;
+    private transient Timer freezeTimer ;
     //This variable tell us for example is the cone head zombie change to normal zombie or not for one time
     private boolean isChanged;
     /**
@@ -94,7 +91,7 @@ public class Zombie extends Character{
      * we change his state and update it with this method
      */
     @Override
-     public void update() {
+    public void update() {
         // we check if the Hp of two types of zombies is less than 200 then we should change them to normal zombie
         if (this instanceof BucketHeadZombie || this instanceof ConeHeadZombie)
         {
@@ -119,11 +116,11 @@ public class Zombie extends Character{
             if (coincidence != null) {
                 zombieState = ZombieState.CHEWING;
                 chewTimerTask = new TimerTask() {
-                        @Override
-                        public void run() {
-                            coincidence.hurt(attackPower);
-                        }
-                    };
+                    @Override
+                    public void run() {
+                        coincidence.hurt(attackPower);
+                    }
+                };
                 chewTimer.schedule(chewTimerTask, 0L, 500L);
             }
         }
@@ -132,7 +129,9 @@ public class Zombie extends Character{
             // Chewing
             Plant coincidence = getCollidedPlant();
             if (coincidence == null) {
-                playSound();
+                if (getGameState().getGameSetting().getSound() == 0) {
+                    playSound();
+                }
                 zombieState = ZombieState.WALKING;
                 chewTimerTask.cancel();
                 chewTimerTask = null;
@@ -200,18 +199,4 @@ public class Zombie extends Character{
         }
     }
 
-    public void roastZombie() {
-    }
-
-    public void checkReachedHouse() {
-
-    }
-
-    public void moveZombie() {
-
-    }
-
-    public void eatPlant() {
-
-    }
 }

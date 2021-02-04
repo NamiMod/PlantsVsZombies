@@ -101,7 +101,9 @@ public class Sun extends Elements{
     @Override
     public void clickAction() {
         super.clickAction();
-        playSound();
+        if (getGameState().getGameSetting().getSound() == 0) {
+            playSound();
+        }
         getGameState().setMoney(getGameState().getMoney() + 25);
     }
     /**

@@ -6,11 +6,13 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import javax.imageio.ImageIO;
 import javax.lang.model.element.Element;
+import javax.sound.sampled.*;
 import javax.swing.JFrame;
 
 /**
@@ -29,19 +31,21 @@ import javax.swing.JFrame;
  * AP Final Project
  *
  * ######################################
- * @author Seyed Mohammad Ghaffarian #
+ * @author Seyed Mohammad Ghaffarian    #
+ * @author Mahdi Rahmani                #
+ * @author Seyed Nami Modarressi        #
  * ######################################
  *
  *
  */
-public class GameFrame extends JFrame {
+public class GameFrame extends JFrame implements Serializable {
 
     public static final int GAME_HEIGHT = 287*2;
     public static final int GAME_WIDTH = 530*2;
 
     private long lastRender;
 
-    private BufferStrategy bufferStrategy;
+    private transient BufferStrategy bufferStrategy;
 
     public GameFrame(String title) {
         super(title);
@@ -108,10 +112,6 @@ public class GameFrame extends JFrame {
         Image money = loadImage("./images/plantPanel.png");
         g2d.drawImage(money, -75, -50, 470, 190, null);
 
-        //state.addElement(new MenuButton(10 ,500 , "Button1.png"  , 150 , 40  , state));
-
-
-        //ArrayList<Elements> elements = state.getElements();
         HashMap<Integer,Elements> myElement = new HashMap<>();
         for (int i = 0; i<state.getElements().size(); i++)
         {
@@ -126,14 +126,6 @@ public class GameFrame extends JFrame {
                 e.printStackTrace();
             }
         }
-        /*
-        for (Elements element : elements) {
-            try {
-                element.draw(g2d);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }*/
 
         for (MapCell cell : state.getMapCells()) {
             try {
@@ -146,10 +138,14 @@ public class GameFrame extends JFrame {
 
         if (state.getGameOver()) {
             g2d.dispose();
-            //Score_Gui p = new Score_Gui(state.getScore());
         }
     }
 
+    /**
+     * load image
+     * @param path image address
+     * @return image
+     */
     public static Image loadImage(String path) {
         try {
             return ImageIO.read(new File(path));
@@ -158,5 +154,4 @@ public class GameFrame extends JFrame {
             return null;
         }
     }
-
 }

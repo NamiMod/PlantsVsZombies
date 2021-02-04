@@ -1,6 +1,7 @@
 package com.company;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * This is MapCell class
@@ -10,7 +11,7 @@ import java.awt.*;
  * @author Mahdi Rhamani & Nami Modarressi
  * @version 1.0
  */
-public class MapCell {
+public class MapCell implements Serializable {
 
     //The position of each cell in this map
     private int[] position;
@@ -137,7 +138,7 @@ public class MapCell {
      * this method is digging up the plant
      * the plant is removed from the ground
      */
-     public void dig() {
+    public void dig() {
         if (!isEmpty()) {
             plantOfThisCell.remove();
             plantOfThisCell = null;

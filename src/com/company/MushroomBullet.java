@@ -1,6 +1,6 @@
 package com.company;
 /**
- * This is Mushroom Bullet class.
+ * This is Mushroom class.
  * Mushroom is one type of our bullets.
  * This class extends Bullet class.
  * The image path of this object and its damage are mentioned in the constructor of this class.

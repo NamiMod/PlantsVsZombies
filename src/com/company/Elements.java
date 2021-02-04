@@ -1,6 +1,7 @@
 package com.company;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * This is element class. the character class extends from this class
@@ -9,7 +10,7 @@ import java.awt.*;
  * @version 1.0
  * @author Mahdi Rahmani  & Nami Modarresi
  */
-public class Elements {
+public class Elements  implements Serializable {
 
     //The position field
     private int [] position;
@@ -27,7 +28,7 @@ public class Elements {
     private int height;
 
     //The Image or gif of the object
-    private Image image;
+    private transient Image image;
 
     /**
      * This is the constructor of this class
@@ -125,6 +126,7 @@ public class Elements {
      * @throws InterruptedException if there is any trouble to drawing image
      */
     public void draw(Graphics2D g2d) throws InterruptedException {
+        image = Main.loadImage(elementPath);
         g2d.drawImage(image, position[0], position[1], width, height, null);
     }
 

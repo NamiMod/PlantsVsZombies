@@ -19,7 +19,7 @@ public class BeetrootCard extends Card{
      * @param chargingTime       the time needed for charging a card again
      */
     public BeetrootCard(int[] position,  GameState gameState, int chargingTime) {
-        super(position, "cards/icedBeetRootCard.png", "cards/beetrootCursor.png", gameState, 125 ,chargingTime);
+        super(position, "cards/icedBeetRootCard.png", "beetCursor.png", gameState, 125 ,chargingTime);
     }
     /**
      * If you click on this kind of card we should this action

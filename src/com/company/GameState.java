@@ -1,16 +1,21 @@
 /*** In The Name of Allah ***/
 
 package com.company;
+import javax.sound.sampled.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.beans.Transient;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.awt.Cursor;
 import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- *  -- Game Frame --
+ *  -- Game state --
  *
  * This class holds the state of game and all of its elements.
  * This class also handles user inputs, which affect the game state.
@@ -28,16 +33,15 @@ import java.util.Iterator;
  *
  */
 
-//Todo : Game setting  *****************************
 
-public class GameState {
+public class GameState implements Serializable {
     //The handler related to mouse
     private MouseHandler mouseHandler;
     //The
     private MouseHandler pointedSelectable;
 
     //The list of elements
-    private  ArrayList<Elements> elements ;
+    private ArrayList<Elements> elements ;
 
     //The list of cells of the yard
     private ArrayList<MapCell> mapCells ;
@@ -78,10 +82,20 @@ public class GameState {
     private GameSetting gameSetting;
 
     private HashMap<String,Card> cards;
+
+    private GameFrame frame;
+
+    private boolean isRun;
+
+    private transient AudioInputStream as2= AudioSystem.getAudioInputStream(new File("./PVS Design Kit/sounds/background.wav"));
+    private transient AudioFormat af2 = as2.getFormat();
+    private transient Clip clip2 = AudioSystem.getClip();
+    private transient DataLine.Info info2 = new DataLine.Info(Clip.class, af2);
+    private transient Line line2 = AudioSystem.getLine(info2);
     /**
      * set first value of parameters
      */
-    public GameState() {
+    public GameState(GameSetting gameSetting) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         elements = new ArrayList<Elements>();
         mapCells = new ArrayList<MapCell>();
         money = 0;
@@ -91,9 +105,55 @@ public class GameState {
         deadZombies = 0;
         pointingToPicker = true;
         isShovelSelected = false;
+        isRun = true;
         score = 0;
-        gameSetting = new GameSetting();
+        this.gameSetting=gameSetting;
+        if (gameSetting.getSound() == 0){
+            playSoundGame();
+        }
         cards = new HashMap<>();
+    }
+
+    /**
+     * @param mapCells map cells
+     */
+    public void setMapCells(ArrayList<MapCell> mapCells) { this.mapCells = mapCells; }
+
+    /**
+     * @param elements elements
+     */
+
+    public void setElements(ArrayList<Elements> elements) {
+        this.elements = elements;
+    }
+
+    /**
+     * @return isRun
+     */
+
+    public boolean isRun() {
+        return isRun;
+    }
+
+    /**
+     * @param run new run
+     */
+    public void setRun(boolean run) {
+        isRun = run;
+    }
+
+    /**
+     * @return frame
+     */
+    public GameFrame getFrame() {
+        return frame;
+    }
+
+    /**
+     * @param frame new frame
+     */
+    public void setFrame(GameFrame frame) {
+        this.frame = frame;
     }
 
     /**
@@ -393,6 +453,33 @@ public class GameState {
         public void mouseMoved(MouseEvent e) {
         }
 
+    }
+
+
+
+    /**
+     * play music
+     * @throws IOException cant open music
+     * @throws UnsupportedAudioFileException music file is not in good format
+     * @throws LineUnavailableException cant track data of file
+     */
+    public void playSoundGame()throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+
+
+
+             if (!line2.isOpen()) {
+                 clip2.open(as2);
+                 clip2.loop(Clip.LOOP_CONTINUOUSLY);
+                 clip2.start();
+             }
+
+
+    }
+
+    public void stop(){
+        if (clip2 != null) {
+            clip2.stop();
+        }
     }
 
 }
